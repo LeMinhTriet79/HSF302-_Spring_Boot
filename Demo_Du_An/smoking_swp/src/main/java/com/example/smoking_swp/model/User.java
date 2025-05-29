@@ -2,10 +2,12 @@ package com.example.smoking_swp.model;
 
 import jakarta.persistence.*;
 
+
 import java.util.Date;
 
 @Entity
 @Table(name = "Users")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
