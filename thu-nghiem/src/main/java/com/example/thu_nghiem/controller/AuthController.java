@@ -23,10 +23,10 @@ public class AuthController {
                                   @RequestParam String password,
                                   Model model) {
         if (userService.registerUser(username, password)) {
-            model.addAttribute("message", "Đăng ký thành công, hãy đăng nhập.");
+            model.addText("message", "Đăng ký thành công, hãy đăng nhập.");
             return "login";
         } else {
-            model.addAttribute("error", "Tên đăng nhập đã tồn tại!");
+            model.addText("error", "Tên đăng nhập đã tồn tại!");
             return "register";
         }
     }
