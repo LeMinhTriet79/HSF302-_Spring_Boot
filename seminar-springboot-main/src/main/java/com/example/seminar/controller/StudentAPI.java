@@ -49,13 +49,23 @@ public class StudentAPI {
 
 
     @PutMapping("/api/student/{id}")
-    public String updateStudentById() {
-        return "Update Student";
+    public ResponseEntity<Student> updateStudentById(@PathVariable Long id, @Valid @RequestBody Student student) {
+        Student updatedStudent = studentService.updateStudentById(id, student);
+        if (updatedStudent != null) {
+            return ResponseEntity.ok(updatedStudent);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/api/student/{id}")
-    public String deleteStudentById() {
-        return "Delete Student";
+    public ResponseEntity<Void> deleteStudentById(@PathVariable Long id) {
+        boolean deleted = studentService.deleteStudentById(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     //Controller --> nhận điều hướng request
