@@ -1,14 +1,17 @@
 package com.example.thu_nghiem.controller;
+import org.springframework.ui.Model;   // Đúng
 
-import ch.qos.logback.core.model.Model;
+
 import com.example.thu_nghiem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
+@RestController
 public class AuthController {
     @Autowired
     private UserService userService;
@@ -23,10 +26,10 @@ public class AuthController {
                                   @RequestParam String password,
                                   Model model) {
         if (userService.registerUser(username, password)) {
-            model.addText("message", "Đăng ký thành công, hãy đăng nhập.");
+            model.addAttribute("message", "Đăng ký thành công, hãy đăng nhập.");
             return "login";
         } else {
-            model.addText("error", "Tên đăng nhập đã tồn tại!");
+            model.addAttribute("error", "Tên đăng nhập đã tồn tại!");
             return "register";
         }
     }
