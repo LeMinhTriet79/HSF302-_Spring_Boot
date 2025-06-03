@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5177") // Cho phép React truy cập
+@CrossOrigin(origins = "http://localhost:5173") // Cho phép React truy cập
 public class AuthController {
 
     @Autowired
