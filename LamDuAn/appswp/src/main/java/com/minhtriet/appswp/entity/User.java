@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.hibernate.annotations.Nationalized;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ public class User {
     private long userId;
 
     @Column(name = "Username", nullable = false, unique = true, length = 255)
+    @Nationalized
     private String username;
 
     @Column(name = "PasswordHash", nullable = false, length = 255)
@@ -32,6 +34,7 @@ public class User {
     private String email;
 
     @Column(name = "FullName", length = 255)
+    @Nationalized
     private String fullName;
 
     @Column(name = "RegistrationDate", nullable = false)
