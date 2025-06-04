@@ -1,10 +1,20 @@
 package com.minhtriet.appswp.controller;
 
+import com.minhtriet.appswp.entity.User;
 import com.minhtriet.appswp.repository.UserRepository;
+import com.minhtriet.appswp.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RestController //Nơi tiếp nhận các request...
 public class UserAPI {
+
+    // LƯU Ý: Controller này dành cho ADMIN quản lý users
+    // Không dành cho đăng nhập/đăng ký (dùng AuthAPI)
 
     //LẤY LÀ GET
     //GET: /api/user
@@ -28,14 +38,16 @@ public class UserAPI {
     @Autowired
     private UserService userService;
 
+    // Lấy tất cả users - CHỈ ADMIN mới được dùng
     @GetMapping("/api/user")
     public ResponseEntity getUser() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
+    // Lấy user theo ID - CHỈ ADMIN hoặc chính user đó
     @GetMapping("/api/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         if (user != null) {
             return ResponseEntity.ok(user);
@@ -44,14 +56,21 @@ public class UserAPI {
         }
     }
 
+    // Tạo user mới - CHỈ ADMIN (user thường dùng /api/auth/register)
     @PostMapping("/api/user")
     public ResponseEntity createNewUser(@Valid @RequestBody User user) {
+        // KIỂM TRA email đã tồn tại chưa
+        if (userService.isEmailExists(user.getEmail())) {
+            return ResponseEntity.badRequest().body("Email đã được sử dụng");
+        }
+
         User newUser = userService.createNewUser(user);
         return ResponseEntity.ok(newUser);
     }
 
+    // Cập nhật user - CHỈ ADMIN hoặc chính user đó
     @PutMapping("/api/user/{id}")
-    public ResponseEntity<User> updateUserById(@PathVariable Integer id, @Valid @RequestBody User user) {
+    public ResponseEntity<User> updateUserById(@PathVariable Long id, @Valid @RequestBody User user) {
         User updatedUser = userService.updateUserById(id, user);
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
@@ -60,8 +79,9 @@ public class UserAPI {
         }
     }
 
+    // Xóa user - CHỈ ADMIN
     @DeleteMapping("/api/user/{id}")
-    public ResponseEntity<Void> deleteUserById(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteUserById(@PathVariable Long id) {
         boolean deleted = userService.deleteUserById(id);
         if (deleted) {
             return ResponseEntity.noContent().build();
@@ -70,7 +90,9 @@ public class UserAPI {
         }
     }
 
-    // Thêm một số endpoint đặc biệt cho User
+    // CÁC ENDPOINT ĐẶC BIỆT - CHỈ ADMIN
+
+    // Tìm user theo username
     @GetMapping("/api/user/username/{username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
         User user = userService.getUserByUsername(username);
@@ -81,6 +103,7 @@ public class UserAPI {
         }
     }
 
+    // Tìm user theo email
     @GetMapping("/api/user/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         User user = userService.getUserByEmail(email);
@@ -91,9 +114,24 @@ public class UserAPI {
         }
     }
 
+    // Lấy users theo role
     @GetMapping("/api/user/role/{role}")
     public ResponseEntity<List<User>> getUsersByRole(@PathVariable String role) {
         List<User> users = userService.getUsersByRole(role);
+        return ResponseEntity.ok(users);
+    }
+
+    // Lấy users có coach
+    @GetMapping("/api/user/with-coach")
+    public ResponseEntity<List<User>> getUsersWithCoach() {
+        List<User> users = userService.getUsersWithCoach();
+        return ResponseEntity.ok(users);
+    }
+
+    // Lấy users theo coach ID
+    @GetMapping("/api/user/coach/{coachId}")
+    public ResponseEntity<List<User>> getUsersByCoachId(@PathVariable Integer coachId) {
+        List<User> users = userService.getUsersByCoachId(coachId);
         return ResponseEntity.ok(users);
     }
 

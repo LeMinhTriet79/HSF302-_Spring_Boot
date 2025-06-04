@@ -20,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserID")
-    private Integer userId;
+    private long userId;
 
     @Column(name = "Username", nullable = false, unique = true, length = 255)
     private String username;
@@ -57,11 +57,17 @@ public class User {
 
     @PrePersist
     protected void onCreate() {
+        // Tự động set thời gian đăng ký khi tạo user mới
         if (registrationDate == null) {
             registrationDate = LocalDateTime.now();
         }
-        if (role == null) {
+        // Đảm bảo role luôn có giá trị mặc định
+        if (role == null || role.trim().isEmpty()) {
             role = "member";
+        }
+        // THÊM MỚI: Nếu username null, dùng email làm username
+        if (username == null || username.trim().isEmpty()) {
+            username = email;
         }
     }
 }
