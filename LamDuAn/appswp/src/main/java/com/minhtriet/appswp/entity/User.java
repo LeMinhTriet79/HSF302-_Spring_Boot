@@ -50,7 +50,7 @@ public class User {
     private LocalDate subscriptionEndDate;
 
     @Column(name = "CoachID")
-    private Integer coachId;
+    private Long coachId;
 
     @Column(name = "Role", nullable = false, length = 255)
     private String role = "member"; // Default value

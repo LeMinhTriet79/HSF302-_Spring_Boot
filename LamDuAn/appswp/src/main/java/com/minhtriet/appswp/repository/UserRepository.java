@@ -28,7 +28,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByCoachIdIsNotNull();
 
     // Lấy users theo coach ID cụ thể
-    List<User> findByCoachId(Integer coachId);
+    List<User> findByCoachId(Long coachId);
 
     // THÊM MỚI: Tìm theo username và email (cho đăng nhập linh hoạt)
     User findByUsernameOrEmail(String username, String email);

@@ -130,7 +130,7 @@ public class UserAPI {
 
     // Lấy users theo coach ID
     @GetMapping("/api/user/coach/{coachId}")
-    public ResponseEntity<List<User>> getUsersByCoachId(@PathVariable Integer coachId) {
+    public ResponseEntity<List<User>> getUsersByCoachId(@PathVariable Long coachId) {
         List<User> users = userService.getUsersByCoachId(coachId);
         return ResponseEntity.ok(users);
     }

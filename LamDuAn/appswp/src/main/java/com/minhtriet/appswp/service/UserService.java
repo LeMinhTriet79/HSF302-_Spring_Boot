@@ -103,7 +103,7 @@ public class UserService {
     }
 
     // Cập nhật last login date - QUAN TRỌNG cho đăng nhập
-    public void updateLastLoginDate(Integer userId) {
+    public void updateLastLoginDate(Long userId) {
         userRepository.findById(userId)
                 .ifPresent(user -> {
                     user.setLastLoginDate(LocalDateTime.now());
@@ -112,7 +112,7 @@ public class UserService {
     }
 
     // THÊM MỚI: Cập nhật mật khẩu (cho chức năng đổi mật khẩu sau này)
-    public boolean updatePassword(Integer userId, String newPasswordHash) {
+    public boolean updatePassword(Long userId, String newPasswordHash) {
         return userRepository.findById(userId)
                 .map(user -> {
                     user.setPasswordHash(newPasswordHash);
@@ -133,7 +133,7 @@ public class UserService {
     }
 
     // Lấy danh sách users theo coach ID
-    public List<User> getUsersByCoachId(Integer coachId) {
+    public List<User> getUsersByCoachId(Long coachId) {
         return userRepository.findByCoachId(coachId);
     }
 }
