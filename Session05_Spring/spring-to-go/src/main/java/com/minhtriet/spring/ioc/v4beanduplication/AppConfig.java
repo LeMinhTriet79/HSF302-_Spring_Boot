@@ -1,8 +1,7 @@
-package com.minhtriet.spring.ioc.v3beanduplication;
+package com.minhtriet.spring.ioc.v4beanduplication;
 
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
@@ -10,13 +9,13 @@ import org.springframework.context.annotation.Primary;
 //không thèm Scan do chủ động tạo bean
 
 public class AppConfig {
-    @Bean
-    @Primary
+    @Bean("sms")
+  //  @Primary
     public HelloMessage smsMessage() {
         return new HelloMessage("SMS");
     }
 
-    @Bean
+    @Bean("email") //đặt tên cho bean để phân biệt
     public HelloMessage emailMessage() {
         return new HelloMessage("EMAIL");
     }

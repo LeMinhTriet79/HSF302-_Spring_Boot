@@ -1,4 +1,4 @@
-package com.minhtriet.spring.ioc.v3beanduplication;
+package com.minhtriet.spring.ioc.v4beanduplication;
 
 public class HelloMessage {
     private String mediumType;
@@ -10,7 +10,7 @@ public class HelloMessage {
 
         public void sayHello(String msg) {
             System.out.println("Sent from\n" + mediumType);
-            System.out.println("V3: The message below comes HelloMessage object\n" + msg);
+            System.out.println("V4: The message below comes HelloMessage object\n" + msg);
         }
 
 }
