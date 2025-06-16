@@ -17,6 +17,6 @@ public class CoffeeApiController {
 
     @GetMapping("/acup")
     public Coffee getACup(){
-        return new Coffee("JC", "Java Coffee nồng nàn vị đắng nhẹ Arabic, 5_700_000");
+        return new Coffee("JC", "Cà phê", 500000);
     }
 }

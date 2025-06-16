@@ -6,7 +6,7 @@ public class Coffee {
     private double price;
 
 
-    public Coffee(String id, double price, String name) {
+    public Coffee(String id, String name, double price) {
         this.id = id;
         this.price = price;
         this.name = name;
