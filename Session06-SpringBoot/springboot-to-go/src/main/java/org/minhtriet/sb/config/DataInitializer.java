@@ -1,4 +1,4 @@
-package org.minhtriet.sb;
+package org.minhtriet.sb.config;
 
 //Muốn class này sẽ tự chạy khi Spring Boot bắt đầu tại container, bắt đầu new các Bean
 //Tự chạy mang ý nghĩa nó tạo Table, chèn data Insert vào table để có sẵn data
@@ -6,6 +6,8 @@ package org.minhtriet.sb;
 //danh mục tỉnh thành phải có trước, ta làm code fist
 
 //run 1 lần thôi
+import org.minhtriet.sb.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +15,15 @@ import org.springframework.stereotype.Component;
 //@Order để chỉ xem runner nào chạy trước
 public class DataInitializer implements CommandLineRunner {
 
+    @Autowired
+    private UserService service; // lười làm constructor, dng field injection
     //HÀM NÀY ĐC SPRINGBOOT TỰ GỌI 1 LẦN DUY NHẤT!!! KHI NEW BEAN - DEPENDENCY
     @Override
     public void run(String... args) throws Exception {
         //đÚNG CHUẨN LÀ GỌI sERVICE, SERVICE GỌI REPO, REPO GỌI JPA
         //SPRING DATA -> SPRING JPA -> JPA -> HIBERNATE
-        System.out.println("create TABLE AND INSERT INTO ... SUCCESSFULY");
+       // System.out.println("create TABLE AND INSERT INTO ... SUCCESSFULY");
+
+        service.createUser(); // tự new tự chạy
     }
 }

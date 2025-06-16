@@ -1,9 +1,4 @@
-package org.minhtriet.sb;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+package org.minhtriet.sb.infra;
 
 //@Component new tự động bởi spring, bởi ioc container
 //cmt lại thì phải new qua @Bean ở chỗ @Configuration nhưng nay là @SpringBootApplication

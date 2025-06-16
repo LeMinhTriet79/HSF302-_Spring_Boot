@@ -1,6 +1,6 @@
 package org.minhtriet.sb;
 
-import org.springframework.boot.ApplicationArguments;
+import org.minhtriet.sb.infra.ExcelGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -19,7 +19,7 @@ public class SpringbootToGoApplication {
         SpringApplication.run(SpringbootToGoApplication.class, args);
         ApplicationContext ctx = SpringApplication.run(ExcelGenerator.class, args);
         ExcelGenerator excelGenerator  = (ExcelGenerator) ctx.getBean("excelGenerator");
-        excelGenerator.generateFile("TUI_NO_KHONG_DAM_HUA ");
+        excelGenerator.generateFile("TUI_NO_KHONG_DAM_HUA.xlsx ");
     }
     @Bean ("excelGenerate")
     public ExcelGenerator excelGenerator(){

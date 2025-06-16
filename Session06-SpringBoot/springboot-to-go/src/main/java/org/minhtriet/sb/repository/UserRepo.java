@@ -1,6 +1,9 @@
-package org.minhtriet.sb;
+package org.minhtriet.sb.repository;
 
-public class UserService {
+import org.springframework.stereotype.Repository;
+
+@Repository // Component, @Service okie luôn, nhưng...
+public class UserRepo {
     //mock - làm giả các hàm để test xem chúng gọi nhau ko
     //các hàm CRUD, tên hàm đặt rất gần table
     //nếu mà sài JPA/Hibernate như đã học - xài thuần nhưng chưa dùng Spring data
