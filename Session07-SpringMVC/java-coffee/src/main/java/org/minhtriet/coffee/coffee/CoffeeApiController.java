@@ -10,8 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CoffeeApiController {
 
     @GetMapping
-    public String getACup(){
+    public String getMessage(){
         return "cà phê là thứ rất quan trọng cho lập trình viên" +
                 "...Uống cà phê là pass môn";
+    }
+
+    @GetMapping("/acup")
+    public Coffee getACup(){
+        return new Coffee("JC", "Java Coffee nồng nàn vị đắng nhẹ Arabic, 5_700_000");
     }
 }
