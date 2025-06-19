@@ -3,6 +3,7 @@ package org.minhtriet.coffee.ntcoffee.controller;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller//bean tồn tại trong ram, tomcat, để handle, cái request url guiwrl lên
@@ -15,5 +16,10 @@ public class LoginController {
     public String showLogin() {
         return "login"; // ghép cái tên trang + .html -> login.html đưa cho Thymeleaf; gửi kèm thêm data
         //nếu cần - Model model
+    }
+
+    @PostMapping("/doLogin")
+    public String doLoginAhihi() {
+        return "products"; //không cần chữ .html
     }
 }
