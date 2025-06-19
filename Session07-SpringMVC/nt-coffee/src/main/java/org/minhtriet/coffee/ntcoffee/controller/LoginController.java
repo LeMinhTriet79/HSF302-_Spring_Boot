@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller//bean tồn tại trong ram, tomcat, để handle, cái request url guiwrl lên
 //@RequestMapping("/login")
@@ -19,7 +20,10 @@ public class LoginController {
     }
 
     @PostMapping("/doLogin")
-    public String doLoginAhihi() {
+    public String doLoginAhihi(@RequestParam("user") String username, @RequestParam("pass") String password) {
         return "products"; //không cần chữ .html
+        //cơ chế giữ nguyên url cũ của doLogin
+        //resubmission, nếu F5 lại thì... submit lại from, ko an toàn
+        //đặc biệt với màn hình tạo mới
     }
 }
