@@ -20,6 +20,12 @@
     <!-- tựa đề table, chữ in đậm -->
          <tbody>
         <!--Phần thân table, chứa data, chứa các dòng, giống như <body> -->
+         <tr th:each="p : ${products}">
+             <td th:text="${p.id}"></td>
+             <td th:text="${p.name}"></td>
+             <td th:text="${p.price}"></td>
+             <td>Sửa | Xóa</td>
+         </tr>
         </tbody>
 
 </table>
