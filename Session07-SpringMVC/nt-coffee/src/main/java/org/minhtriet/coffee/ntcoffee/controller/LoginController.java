@@ -2,6 +2,7 @@ package org.minhtriet.coffee.ntcoffee.controller;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,8 @@ public class LoginController {
     }
 
     @PostMapping("/doLogin")
-    public String doLoginAhihi(@RequestParam("user") String username, @RequestParam("pass") String password) {
+    public String doLoginAhihi(@RequestParam("user") String username, @RequestParam("pass") String password, Model model) {
+        model.addAttribute("sentUser", username);
         return "products"; //không cần chữ .html
         //cơ chế giữ nguyên url cũ của doLogin
         //resubmission, nếu F5 lại thì... submit lại from, ko an toàn
