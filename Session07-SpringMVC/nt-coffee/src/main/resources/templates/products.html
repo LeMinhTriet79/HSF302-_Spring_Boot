@@ -25,6 +25,10 @@
              <td th:text="${p.name}"></td>
              <td th:text="${p.price}"></td>
              <td>Sửa | Xóa</td>
+             <td>
+                 <a th:href="@{'/products/edit/' + ${p.id}}">Sửa</a> /lấy là trị là dấu $, @ là url
+                 <a th:href="@{'/products/delete/' + ${p.id}}">Xóa</a>
+             </td>
          </tr>
         </tbody>
 

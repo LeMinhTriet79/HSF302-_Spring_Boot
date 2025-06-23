@@ -38,6 +38,16 @@ public class LoginController {
 
         );
 
+        //model chính là 1 cái hộp gửi đồ, chứ đc nhiều đồ, đồ chính là các object mà bào đc bạn muốn cất trữ,
+        //mỗi món đồ jhu bỉ vài hộp/hộc tủ, luôn đi kèm 1 chùa khóa
+
+        //Thông qua chìa khóa, ta mở tủ và ấy đc món đồ trở lại
+        //y chang hộc tủ giữ đồ ở sưu thị
+        //tủ hộp chứa đồ, đã có đồ rồi, có đồ bên trong luôn đc ship kèm theo
+        //Lệnh chuyển trang, lệnh return cái trang - view
+        //lát hồi bên trang/ view lấy đồ trong hộp bày lên trang - render
+        //MVC, Controller nhận request, chuẩn bị model(data) gửi cho trang view và render
+        //Hộp model có data, đi kèm với trang products.html
         model.addAttribute("sentUser", username);
         model.addAttribute("products", productList);
         return "products"; //không cần chữ .html
