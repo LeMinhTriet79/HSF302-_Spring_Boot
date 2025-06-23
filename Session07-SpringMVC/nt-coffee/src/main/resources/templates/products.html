@@ -1,3 +1,8 @@
+
+Ghi chí cho get/ post với web app mà viết theo server - side rendering(trang web được tạo ra trên server
+- khóc cơ chế của React
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -24,9 +29,10 @@
              <td th:text="${p.id}"></td>
              <td th:text="${p.name}"></td>
              <td th:text="${p.price}"></td>
-             <td>Sửa | Xóa</td>
+<!--             <td>Sửa | Xóa</td>-->
              <td>
-                 <a th:href="@{'/products/edit/' + ${p.id}}">Sửa</a> /lấy là trị là dấu $, @ là url
+<!--                 /lấy là trị là dấu $, @ là url-->
+                 <a th:href="@{'/products/edit/' + ${p.id}}">Sửa</a>
                  <a th:href="@{'/products/delete/' + ${p.id}}">Xóa</a>
              </td>
          </tr>
