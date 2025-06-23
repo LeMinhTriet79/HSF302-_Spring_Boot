@@ -50,9 +50,15 @@ public class LoginController {
         //Hộp model có data, đi kèm với trang products.html
         model.addAttribute("sentUser", username);
         model.addAttribute("products", productList);
-        return "products"; //không cần chữ .html
+       // return "products"; //không cần chữ .html
         //cơ chế giữ nguyên url cũ của doLogin
         //resubmission, nếu F5 lại thì... submit lại from, ko an toàn
         //đặc biệt với màn hình tạo mới
+        return "redirect:/HoangXuanTrinh";
+        // Gọi Url mới hoàn toàn trên trình duyệt, get mới hoàn toàn!!!,
+        //Get mới hoàn toàn, url được thay đổi
+        // 1 url 1 hàm mới tươngứng --> hàm get cần có ứng với /HoangXuanTrinh
     }
 }
+//Nếu dùng REDIRECT KO GIỮ LẠI ĐC MODEL ĐANG CÓ, VÌ REDIRECT LÀ GET MỚI URL MỚI
+//MỖI GET MỚI SẼ CÓ MỘT THÙNG CHỨA MỚI VÀ RỖNG
