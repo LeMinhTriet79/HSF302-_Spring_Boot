@@ -1,0 +1,26 @@
+Ghi chí cho get/ post với web app mà viết theo server - side rendering(trang web được tạo ra trên server
+- khóc cơ chế của React - client - side rendering
+
+1. Get và Post phải ứng với một url, phải có url cho get và post, phải có hàm tương ứng trong @Controller
+> get - 1 url (có thể kèm data qua tham số ?biến=value; nhưng bị giới hạn chiều dài)
+-> ứng với một hàm có @có getmapping(url)
+   Hàm là gì đó
+   Hàm phải return 1 trang nào đó!!!
+   và Url sau khi hàm return trang không đổi.
+   trang được render trả cho browser
+
+> và url ban đầu sau khi hàm return trang là không đổi
+
+ > get - url - hàm trả về kết quả -> url giữ nguyên vì kết quả trả về là nằm trong phần render của Browser
+
+
+ 2. Post -> ứng với 1 url
+ (luôn kèm data, data có thể rất nhiều, nằm trong form)
+ --> nói cách khác cho dễ hình dung là
+ --> Post chính là Get 1 Url nhưng đi kèm nhiều data
+ --> ứng với 1 hàm có @post Mapping (url)
+      hàm nhận nhiều data hơn (1 form)
+       Hàm là gì đó
+         Hàm phải return 1 trang nào đó!!!
+         và Url sau khi hàm return trang không đổi.
+         trang được render trả cho browser
