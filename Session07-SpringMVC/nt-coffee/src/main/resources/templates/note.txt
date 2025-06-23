@@ -24,3 +24,19 @@ Ghi chí cho get/ post với web app mà viết theo server - side rendering(tra
          Hàm phải return 1 trang nào đó!!!
          và Url sau khi hàm return trang không đổi.
          trang được render trả cho browser
+
+  > F5 TRÊN URL POST, SẼ BỊ GỬI LẠI CÁI FORM - RESUMISSION, VÌ URL VẪN LÀ URL POST
+  (POST: URL KÈM DATA NHIỀU)
+
+  > F5 TRÊN URL GET THÌ SAO? THÌ GET TRANG BÌNH THƯỜNG, URL VẪN LÀ GET
+         =======================================================
+ Câu lệnh return "trang - view"; - không cần có .html sẽ:
+ -  Không thay đổi url(kể cả post/get)
+ - mà chỉ thay đổi phần content của browser
+ Lý do: render trong contents của browser mang ý nghĩa kết quả trả về của việc gọi URL
+ , thì Url phải giữ nguyên , chỉ show kết quả trả về ở contents.
+ gọi url thì phải trả VỀ content
+
+ >>>KẾT LUẬ TIẾP THEO
+ - TRANG NÀO MÀ KHÔNG CÓ FORM NHẬP, MUỐN GỌI NÓ LÊN, MUỐN NÓ ĐƯỢC RETURN TRỰC TIẾP TỪ URL
+ NÓ CẦN CÓ HÀM GET
