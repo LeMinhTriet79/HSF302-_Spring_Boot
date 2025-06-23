@@ -1,6 +1,7 @@
 package org.minhtriet.coffee.ntcoffee.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.minhtriet.coffee.ntcoffee.entity.Account;
 import org.minhtriet.coffee.ntcoffee.entity.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,14 @@ public class ProductController {
         );
        // model.addAttribute("sentUser", username);
         model.addAttribute("products", productList);
-        model.addAttribute("sentUser", session.getAttribute("sentUser"));
+       // model.addAttribute("sentUser", session.getAttribute("sentUser"));
+        //có session lo giữ acc rồi
+        Account acc = (Account) session.getAttribute("acc");
+        model.addAttribute("role", acc.getRole());
+
+
+        //gửi danh sách sản phẩm + role sang trang!!!
+        // Có role thì bật tắt nút bấm
         return "products";
     }
 }

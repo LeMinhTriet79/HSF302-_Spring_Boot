@@ -9,8 +9,8 @@
     <title>Title</title>
 </head>
 <body>
-<h6 th:text="${sentUser}" style="color: red">Hello admin</h6>
-<h1 style="color: red">The list of Hoàng Ngọc Trinh Coffee Products</h1>
+<h6 th:text="'Curent Role: ' + ${role}" style="color: red">Hello admin</h6>
+<h1 style="color: red">The list of Đào Minh Khải Coffee Products</h1>
 <br>
 <table>
     <thead>
@@ -18,7 +18,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
-        <th>Action</th>
+        <th th:if="">Action</th>
     </tr>
     </thead>
     <!-- tựa đề table, chữ in đậm -->

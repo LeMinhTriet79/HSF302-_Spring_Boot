@@ -1,6 +1,7 @@
 package org.minhtriet.coffee.ntcoffee.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.minhtriet.coffee.ntcoffee.entity.Account;
 import org.minhtriet.coffee.ntcoffee.entity.Product;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,23 @@ public class LoginController {
 
         //gửi kèm cái data của chỗ này sang get mới, tức là model/thùng của bên kia, kèm thêm các món bên bày gửi sang!!!\
         //redirectAttributes.addFlashAttribute("sentUser", username);
+
+
+        //Lấy từ DB một cái Account where user = user, pass = pass đưa vào và có đc role 1, 2 tùy gõ vào
+        // có được role 1, 2 tùy gõ vào
+        //hard-code
+        Account account;
+        if(username.equalsIgnoreCase("admin"))
+        {
+            account = new Account(username,password, 1);
+        } else {
+            account = new Account(username,password, 2);
+        }
+        session.setAttribute("acc", account);
+
+
+
+
 
         session.setAttribute("sentUser", username);
         //redirectAttributes.addFlashAttribute("products", productList);
