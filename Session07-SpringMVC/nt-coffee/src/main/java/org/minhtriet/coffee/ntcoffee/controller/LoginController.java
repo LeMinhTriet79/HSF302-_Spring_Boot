@@ -1,5 +1,6 @@
 package org.minhtriet.coffee.ntcoffee.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.minhtriet.coffee.ntcoffee.entity.Product;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +27,14 @@ public class LoginController {
     }
 
     @PostMapping("/doLogin")
-    public String doLoginAhihi(@RequestParam("user") String username, @RequestParam("pass") String password, Model model) {
+    public String doLoginAhihi(@RequestParam("user") String username, @RequestParam("pass") String password,   RedirectAttributes redirectAttributes, HttpSession session) {
 
         //chuẩn bị sẵn danh sách món cafe, list<>, đính kèm theo thằng thùng chưa model
         //Thùng chứa model sẽ chưa email + list
         //
 
 
-        List<Product> productList = List.of(new Product("1", "Coffee Indonesia", 20000),
-                new Product("2", "Cà phê Ả Rập", 15000),
-                new Product("3", "Coffee Latte", 18000)
 
-        );
 
         //model chính là 1 cái hộp gửi đồ, chứ đc nhiều đồ, đồ chính là các object mà bào đc bạn muốn cất trữ,
         //mỗi món đồ jhu bỉ vài hộp/hộc tủ, luôn đi kèm 1 chùa khóa
@@ -48,12 +46,19 @@ public class LoginController {
         //lát hồi bên trang/ view lấy đồ trong hộp bày lên trang - render
         //MVC, Controller nhận request, chuẩn bị model(data) gửi cho trang view và render
         //Hộp model có data, đi kèm với trang products.html
-        model.addAttribute("sentUser", username);
-        model.addAttribute("products", productList);
+
        // return "products"; //không cần chữ .html
         //cơ chế giữ nguyên url cũ của doLogin
         //resubmission, nếu F5 lại thì... submit lại from, ko an toàn
         //đặc biệt với màn hình tạo mới
+
+        //gửi kèm cái data của chỗ này sang get mới, tức là model/thùng của bên kia, kèm thêm các món bên bày gửi sang!!!\
+        //redirectAttributes.addFlashAttribute("sentUser", username);
+
+        session.setAttribute("sentUser", username);
+        //redirectAttributes.addFlashAttribute("products", productList);
+        //2 món này sẽ đc gửi kèm theo get Products/, fill thêm vài thùng bên products
+
         return "redirect:/HoangXuanTrinh";
         // Gọi Url mới hoàn toàn trên trình duyệt, get mới hoàn toàn!!!,
         //Get mới hoàn toàn, url được thay đổi
