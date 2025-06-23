@@ -38,5 +38,7 @@ Ghi chí cho get/ post với web app mà viết theo server - side rendering(tra
  gọi url thì phải trả VỀ content
 
  >>>KẾT LUẬ TIẾP THEO
+ - MUỐN GỌI TRANG TỪ URL(GET/POST) THÌ PHẢI CÓ HÀM TƯƠNG ỨNG
+ - MỘT TRANG MUỐN SHOW RA
  - TRANG NÀO MÀ KHÔNG CÓ FORM NHẬP, MUỐN GỌI NÓ LÊN, MUỐN NÓ ĐƯỢC RETURN TRỰC TIẾP TỪ URL
  NÓ CẦN CÓ HÀM GET
