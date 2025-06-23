@@ -12,13 +12,20 @@
 <h6 th:text="'Curent Role: ' + ${role}" style="color: red">Hello admin</h6>
 <h1 style="color: red">The list of Đào Minh Khải Coffee Products</h1>
 <br>
+<!-- nút new nằm ngoài table, ẩn hiện nếu là admin-->
+<a th:if="${role == 1}" th:href="@{/products/add}">New product</a>
+
+<!--<p th:if="${role == 1}">-->
+<!--    <a th:href="@{/products/add}">New product</a>-->
+<!--</p>-->
+
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
-        <th th:if="">Action</th>
+        <th th:if="${role == 1}">Action</th>
     </tr>
     </thead>
     <!-- tựa đề table, chữ in đậm -->
@@ -29,7 +36,7 @@
              <td th:text="${p.name}"></td>
              <td th:text="${p.price}"></td>
 <!--             <td>Sửa | Xóa</td>-->
-             <td>
+             <td th:if="${role == 1}">
 <!--                 /lấy là trị là dấu $, @ là url-->
                  <a th:href="@{'/products/edit/' + ${p.id}}">Sửa</a>
                  <a th:href="@{'/products/delete/' + ${p.id}}">Xóa</a>
