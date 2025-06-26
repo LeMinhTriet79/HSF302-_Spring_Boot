@@ -9,12 +9,31 @@
 <!--show 1 sản pẩm nhưng lại cho người ta gõ để sửa-->
 <!--mình - trang này sẽ nhận object Product từ model ai đó gửi-->
 
-<input type="hidden" id="productId" th:value="${p.id}">
+<!--<input type="hidden" id="productId" th:value="${p.id}">-->
+<!--<p>-->
+<!--    <label for="productId">ID:</label>-->
+<!--    <input type="text" name="id" id="productId" th:value="${p.name}">-->
+<!--</p>-->
 
-<label for="productName"> Name </label>
-<input type="text" id = "productName" th:value="${p.name}">
-<!--th:text là in ra màn hình-->
-<label for="productPrice"> Price </label>
-<input type="text" id = "productPrice" th:value="${p.price}">
+<p>
+<!--    <label for="productId">ID:</label>-->
+    <input type="hidden" name="id" id="productId" th:value="${p.name}">
+</p>
+
+<p>
+    <label for="productName"> Name </label>
+    <input type="text" id = "productName" th:value="${p.name}">
+</p>
+
+<p>
+    <!--th:text là in ra màn hình-->
+    <label for="productPrice"> Price </label>
+    <input type="text" id = "productPrice" th:value="${p.price}">
+</p>
+
+<p>
+    <button type="submit">Submit</button>
+</p>
+
 </body>
 </html>
