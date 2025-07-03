@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${movie.movieId != null ? 'Edit Movie' : 'Add Movie'}"></title>
+</head>
+<body>
+<h2 th:text="${movie.movieId != null ? 'Edit Movie' : 'Add Movie'}"></h2>
+<div th:text="${msg}"></div>
+<form th:action="@{${movie.movieId != null ? '/movies/edit/' + movie.movieId : '/movies/add'}}" method="post">
+    <label>Name:</label>
+    <input name="movieName" th:value="${movie.movieName}" required><br>
+    <label>Duration:</label>
+    <input type="number" name="duration" th:value="${movie.duration}" required><br>
+    <label>Actor:</label>
+    <input name="actor" th:value="${movie.actor}" required><br>
+    <label>Status:</label>
+    <select name="status" required>
+        <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}" th:selected="${movie.status} == ${s}"></option>
+    </select><br>
+    <label>Director:</label>
+    <select name="director.directorId" required>
+        <option th:each="d : ${directors}" th:value="${d.directorId}" th:text="${d.directorName}" th:selected="${movie.director?.directorId} == ${d.directorId}"></option>
+    </select><br>
+    <button type="submit">Save</button>
+    <a th:href="@{/movies}">Cancel</a>
+</form>
+</body>
+</html>

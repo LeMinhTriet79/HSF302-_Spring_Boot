@@ -44,6 +44,11 @@
          </tr>
         </tbody>
 
+<!--    Thông báo đã cập nhật thành công trong tình huống edit/ create màn hình này thì đc show bởi 2 caach,
+đi từ login sang, đi từ edit/new quay về ko phải lúc nào cũng in message, đi từ login sang ko in mesage
+dùng lệnh if, đi từ login sang, message rỗng, đi từ edit form, mesage có dữ loeeju
+-->
+    <p style="color: red" th:if="{message}" th:text="'Status' + ${message}"></p>
 </table>
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+<!-- Thông báo lỗi trong trang neu trang login failed và mở lại trang-->
+<p th:if="${error}" th:text="'ERROR: ' + ${error}" style="color: red;"></p>
+<form action="/do-login" method="post">
+    <p>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+    </p>
+    <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </p>
+    <p>
+        <button type="submit">Login</button>
+    </p>
+
+</form>
+<footer>
+    <p>&#169; 2025 giáo.làng</p>
+</footer>
+
+</body>
+</html>

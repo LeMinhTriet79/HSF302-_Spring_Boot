@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product detail</title>
+</head>
+<body>
+
+<h1>Product in detail</h1>
+<!--show 1 sản phẩm nhưng lại cho người ta gõ để chỉnh sửa-->
+<!-- mình - trang này sẽ nhận object Product từ model do ai đó gửi-->
+
+<!--<input type="hidden" name = "id" id="productId" th:value="${p.id}">-->
+
+<!-- th:value dùng để điền value có ở đâu đó vào ô nhập
+     th:text là in ra màn hình
+     -->
+
+<!--<p>-->
+<!--&lt;!&ndash;    <label for="productId">Id:</label>&ndash;&gt;-->
+<!--    <input type="hidden" name="id" id="productId" th:value="${p.id}">-->
+<!--</p>-->
+
+
+<form th:action="@{/products/save}" method="post">
+    <p>
+        <label for="productId">Id:</label>
+        <input type="text" name="id" id="productId" th:value="${p.id}">
+    </p>
+
+    <p>
+        <label for="productName">Name:</label>
+        <input type="text" name="name" id="productName" th:value="${p.name}">
+    </p>
+
+    <p>
+        <label for="productPrice">Price:</label>
+        <input type="text" name="price" id="productPrice" th:value="${p.price}">
+    </p>
+
+    <p>
+        <button type="submit">Save</button>
+    </p>
+</form>
+
+
+</body>
+</html>

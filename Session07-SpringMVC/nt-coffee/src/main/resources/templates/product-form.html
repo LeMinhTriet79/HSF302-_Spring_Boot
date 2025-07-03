@@ -10,30 +10,33 @@
 <!--mình - trang này sẽ nhận object Product từ model ai đó gửi-->
 
 <!--<input type="hidden" id="productId" th:value="${p.id}">-->
+<p>
+    <label for="productId">ID:</label>
+    <input type="text" name="id" id="productId" th:value="${p.name}">
+</p>
+
 <!--<p>-->
-<!--    <label for="productId">ID:</label>-->
-<!--    <input type="text" name="id" id="productId" th:value="${p.name}">-->
+<!--&lt;!&ndash;    <label for="productId">ID:</label>&ndash;&gt;-->
+<!--    <input type="hidden" name="id" id="productId" th:value="${p.id}">-->
 <!--</p>-->
 
-<p>
-<!--    <label for="productId">ID:</label>-->
-    <input type="hidden" name="id" id="productId" th:value="${p.name}">
-</p>
+<form th:action="@{/products/save}" method="POST">
+    <p>
+        <label for="productName"> Name </label>
+        <input type="text" id="productName" th:value="${p.name}">
+    </p>
 
-<p>
-    <label for="productName"> Name </label>
-    <input type="text" id = "productName" th:value="${p.name}">
-</p>
+    <p>
+        <!--th:text là in ra màn hình-->
+        <label for="productPrice"> Price </label>
+        <input type="text" id="productPrice" th:value="${p.price}">
+    </p>
 
-<p>
-    <!--th:text là in ra màn hình-->
-    <label for="productPrice"> Price </label>
-    <input type="text" id = "productPrice" th:value="${p.price}">
-</p>
+    <p>
+        <button type="submit" style="color: red">save</button>
+    </p>
+</form>
 
-<p>
-    <button type="submit">Submit</button>
-</p>
 
 </body>
 </html>

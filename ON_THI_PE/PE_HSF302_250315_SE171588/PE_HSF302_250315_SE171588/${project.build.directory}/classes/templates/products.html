@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Sony Products</title>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>List of Sony Products</h1>
+
+    <!-- Search Form -->
+    <form action="/products/search" method="get" style="text-align: center;">
+        <input type="text" th:value="${keyword}" id="keyword" name="keyword" placeholder="Enter keyword">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Create Button (Only for Admin) -->
+    <a th:if="${session.get('role') == 1}" th:href="@{'/products/create'}" class="btn-create">Create Product</a>
+
+    <!-- Product Table -->
+    <table>
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Category</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th th:if="${session.get('role') == 1}">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, stat : ${products}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.stock}"></td>
+            <td th:text="${product.getSonyCategories().getCateName()}"></td>
+            <td th:text="${#dates.format(product.createdAt, 'yyyy-MM-dd')}"></td>
+            <td th:text="${#dates.format(product.updatedAt, 'yyyy-MM-dd')}"></td>
+            <td th:if="${session.get('role') == 1}">
+                <a th:href="@{'/products/edit/' + ${product.productID}}">Edit</a>
+                <a th:href="@{'/products/delete/' + ${product.productID}}"
+                   onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Logout Link -->
+    <a th:href="@{'/logout'}" class="logout-link">Logout</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h6 th:text="'Current Role: ' + ${role}">Hello ???</h6>
+<h1>The list of Ngọc Trinh Coffee products</h1>
+<br>
+
+
+<!--THÔNG BÁO SẢN PHẨM ĐÃ ĐƯỢC CẬP NHẬT THÀNH CÔNG TRONG TÌNH HUỐNG EDIT | CREATE
+MÀN HÌNH NÀY THÌ ĐƯỢC SHOW BỞI 2 CÁCH: ĐI TỪ LOGIN SANG, ĐI TỪ EDIT/NEW QUAY VỀ
+KHÔNG PHẢI LÚC NÀO CŨNG IN MESSAGE, ĐI TỪ LOGIN SANG KHÔNG IN MESSAGE
+DÙNG LỆNH IF, đi từ login sang, message rỗng, đi từ edit form, message có dữ liệu-->
+
+<p style="color: deeppink" th:if="${message}" th:text="'STATUS ' + ${message}"></p>
+
+<!--//THEO CHUẨN HTML5 ***********************-->
+<!-- Script alert sau khi trang load xong -->
+<script th:if="${message}" th:inline="javascript">
+    window.addEventListener('load', function() {
+        // Thymeleaf sẽ render thành: alert("…");
+        alert([[${message}]]);
+    });
+</script>
+
+
+<!--nút new nằm ngoài table, ẩn hiện nếu là admin -->
+<p th:if="${role == 1}">
+    <a th:href="@{/products/add}">New product</a>
+</p>
+
+<table>
+    <thead>
+    <!--    Tựa đề table, in đậm chữ, giống như <head> -->
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th th:if="${role == 1}">Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!--    Thân table, chứa data, chứa các dòng, giống như <body> -->
+    <tr th:each="p : ${products}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.price}"></td>
+        <td th:if="${role == 1}">
+            <a th:href="@{'/products/edit/' + ${p.id}}">Sửa</a> |
+            <a th:href="@{'/products/delete/' + ${p.id}}">Xoá</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>

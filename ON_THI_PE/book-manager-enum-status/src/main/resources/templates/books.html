@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>The list of books</h1>
+
+    <div style="text-align: right; padding: 10px;" >
+        <a href="/logout" style="color: red;font-weight: bold">Logout</a>
+    </div>
+
+<!--    Form nhận keyword để search theo title hoặc author-->
+    <form action="/books" method="get">
+<!--        GỬI KEYWORD QUA URL - GET METHOD -->
+        <label for="kw">Tìm theo tựa sách hoặc tác giả:</label>
+        <input type="text" id="kw" name="kw">
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="ACTIVE">ACTIVE</option>
+            <option value="INACTIVE">INACTIVE</option>
+            <option value="COMING_SOON">COMING SOON</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+
+<!--    nếu role == 1 tức là admin, thẻ này xuất hiện-->
+    <div th:if="${role == 1}" style="width: 80%; margin: auto;">
+        <a th:href="@{'/create'}">Tạo mới sách</a>
+    </div>
+    <table style="width: 80%; border-collapse: collapse; margin: auto; text-align: center">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; padding: 5px;">Mã sách</th>
+                <th style="border: 1px solid black; padding: 5px;">Tên sách</th>
+                <th style="border: 1px solid black; padding: 5px;">Tác giả</th>
+                <th style="border: 1px solid black; padding: 5px;">Giá tiền</th>
+                <th style="border: 1px solid black; padding: 5px;">Trạng thái</th>
+                <th style="border: 1px solid black; padding: 5px;">Phân loại</th>
+                <th th:if="${role == 1}" style="border: 1px solid black; padding: 5px;">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="obj : ${books}">
+                <td style="border: 1px solid black; padding: 5px;" th:text="${obj.id}"></td>
+                <td style="border: 1px solid black; padding: 5px;"><span th:text="${obj.title}"></span></td>
+                <td style="border: 1px solid black; padding: 5px;" th:text="${obj.author}"></td>
+                <td style="border: 1px solid black; padding: 5px;" th:text="${obj.price}"></td>
+                <td style="border: 1px solid black; padding: 5px;" th:text="${obj.status}"></td>
+                <td style="border: 1px solid black; padding: 5px;"><span th:text="${obj.cate.name}"></span></td>
+          <!--  <td style="border: 1px solid black; padding: 5px;">Sửa | Xoá</td> -->
+                <td th:if="${role == 1}" style="border: 1px solid black; padding: 5px;">
+                    <a th:href="@{'/edit/' + ${obj.id}}">Sửa</a> |
+                    <a th:href="@{'/delete/' + ${obj.id}}"
+                       onclick="return confirm('Are you sure?');">Xoá</a>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
