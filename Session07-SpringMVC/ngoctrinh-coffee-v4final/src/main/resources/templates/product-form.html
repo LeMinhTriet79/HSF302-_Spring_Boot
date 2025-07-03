@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Form</title>
+</head>
+<body>
+<h1 th:text="${product.id == null ? 'Add Product' : 'Edit Product'}"></h1>
+<form th:action="@{/products/save}" th:object="${product}" method="post">
+    <p>
+        <label>ID:</label>
+        <input type="text" th:field="*{id}" th:readonly="${product.id != null}" required/>
+    </p>
+    <p>
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" required/>
+    </p>
+    <p>
+        <label>Quantity:</label>
+        <input type="number" th:field="*{quantity}" min="0" required/>
+    </p>
+    <p>
+        <label>Price:</label>
+        <input type="number" th:field="*{price}" min="0" step="0.01" required/>
+    </p>
+    <p>
+        <label>Category:</label>
+        <select th:field="*{cate.id}" required>
+            <option value="">-- Select Category --</option>
+            <option th:each="c : ${categories}"
+                    th:value="${c.id}"
+                    th:text="${c.name}">
+            </option>
+        </select>
+    </p>
+    <button type="submit">Save</button>
+    <a th:href="@{/products}">Cancel</a>
+</form>
+</body>
+</html>

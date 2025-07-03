@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+<h1>Product List</h1>
+<form th:action="@{/products}" method="get">
+    <input type="text" name="keyword" th:value="${param.keyword}" placeholder="Search by name..."/>
+    <button type="submit">Search</button>
+    <a th:href="@{/products}">Clear</a>
+</form>
+<br>
+<!-- Chỉ hiện nút Add nếu là ADMIN -->
+<a th:if="${role == 'ADMIN'}" th:href="@{/products/add}">Add New Product</a>
+<br><br>
+<table border="1" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${products}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.quantity}"></td>
+        <td th:text="${p.price}"></td>
+        <td th:text="${p.cate != null ? p.cate.name : 'No Category'}"></td>
+        <td>
+            <!-- Chỉ ADMIN mới được Edit, Delete -->
+            <span th:if="${role == 'ADMIN'}">
+                <a th:href="@{/products/edit/{id}(id=${p.id})}">Edit</a> |
+                <a th:href="@{/products/delete/{id}(id=${p.id})}"
+                   onclick="return confirm('Delete this product?');">Delete</a>
+            </span>
+            <!-- Nếu không phải ADMIN thì hiện View Only -->
+            <span th:if="${role != 'ADMIN'}">View Only</span>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(products)}">
+        <td colspan="6">No product found.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

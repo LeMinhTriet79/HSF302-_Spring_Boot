@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create | Update Product</title>
+</head>
+<body>
+<h1 th:text="${selectedOne.id != null} ? 'Update Product' : 'Create Product'"></h1>
+<form th:action="@{/products/save}" method="post">
+    <p>
+        <label for="id">Product ID</label>
+        <input type="text"
+               th:value="${selectedOne.id}"
+               id="id"
+               name="id"
+               th:readonly="${selectedOne.id != null}" />
+    </p>
+    <p>
+        <label for="name">Product Name</label>
+        <input type="text"
+               th:value="${selectedOne.name}"
+               id="name"
+               name="name"
+               required/>
+    </p>
+    <p>
+        <label for="quantity">Quantity</label>
+        <input type="number"
+               th:value="${selectedOne.quantity}"
+               id="quantity"
+               name="quantity"
+               min="0"
+               required/>
+    </p>
+    <p>
+        <label for="price">Product Price</label>
+        <input type="number"
+               th:value="${selectedOne.price}"
+               id="price"
+               name="price"
+               min="0"
+               step="0.01"
+               required/>
+    </p>
+    <p>
+        <label for="category">Category</label>
+        <select id="category" name="category.id" required>
+            <option value="" disabled th:selected="${selectedOne.category == null}">--Select Category--</option>
+            <option th:each="cat : ${categoryList}"
+                    th:value="${cat.id}"
+                    th:text="${cat.name}"
+                    th:selected="${selectedOne.category != null} ? ${cat.id} == ${selectedOne.category.id} : false">
+            </option>
+        </select>
+    </p>
+    <button type="submit">Save</button>
+    <a th:href="@{/products}">Cancel</a>
+</form>
+</body>
+</html>

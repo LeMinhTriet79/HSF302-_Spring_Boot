@@ -5,28 +5,28 @@
     <title>The list of products</title>
 </head>
 <body>
-
-
 <h1>The list of products</h1>
-
-
-<table>
+<p>
+    <a th:href="@{'/products/new'}">CREATE PRODUCT</a>
+</p>
+<table border="1">
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Quantity</th>
         <th>Price</th>
+        <th>Category</th>
         <th>Actions</th>
     </tr>
     </thead>
-
     <tbody>
     <tr th:each="p : ${productList}">
         <td th:text="${p.id}"></td>
         <td th:text="${p.name}"></td>
         <td th:text="${p.quantity}"></td>
         <td th:text="${p.price}"></td>
+        <td th:text="${p.category != null ? p.category.name : ''}"></td>
         <td>
             <a th:href="@{'/products/edit/' + ${p.id}}">Edit</a> |
             <a th:href="@{'/products/delete/' + ${p.id}}">Delete</a>
@@ -34,6 +34,5 @@
     </tr>
     </tbody>
 </table>
-
 </body>
 </html>
