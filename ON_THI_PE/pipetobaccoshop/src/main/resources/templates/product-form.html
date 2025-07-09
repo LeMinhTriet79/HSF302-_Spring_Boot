@@ -6,7 +6,6 @@
 </head>
 <body>
 <h2 th:text="${product.id != null ? 'Sửa sản phẩm' : 'Thêm sản phẩm'}"></h2>
-<a th:href="@{/logout}" style="margin-left: 20px; color: #3B3B98; font-weight: bold;">Đăng xuất</a>
 
 <form th:action="@{/product/save}" th:object="${product}" method="post">
   <input type="hidden" th:field="*{id}"/>
