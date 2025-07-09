@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Danh sách công việc</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div>
+  Xin chào <span sec:authentication="name"></span>
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+  </form>
+  <a th:href="@{/}">Trang chủ</a>
+</div>
+<h2>Danh sách công việc</h2>
+<div sec:authorize="hasAnyAuthority('ADMIN','LEADER')">
+  <a th:href="@{/tasks/create}">Thêm công việc</a>
+</div>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Tên công việc</th>
+    <th>Mô tả</th>
+    <th>Bắt đầu</th>
+    <th>Kết thúc</th>
+    <th>Trạng thái</th>
+    <th>Người thực hiện</th>
+    <th>Dự án</th>
+    <!-- Chỉ hiện cột Hành động với ADMIN, LEADER -->
+    <th sec:authorize="hasAnyAuthority('ADMIN','LEADER')">Hành động</th>
+  </tr>
+  <tr th:each="task : ${tasks}">
+    <td th:text="${task.id}"></td>
+    <td th:text="${task.name}"></td>
+    <td th:text="${task.description}"></td>
+    <td th:text="${task.startDate}"></td>
+    <td th:text="${task.endDate}"></td>
+    <td th:text="${task.status.name}"></td>
+    <td th:text="${task.assignee.name}"></td>
+    <td th:text="${task.project.name}"></td>
+    <!-- Chỉ hiện nút Sửa/Xóa với ADMIN, LEADER -->
+    <td sec:authorize="hasAnyAuthority('ADMIN','LEADER')">
+      <a th:href="@{|/tasks/edit/${task.id}|}">Sửa</a>
+      <a th:href="@{|/tasks/delete/${task.id}|}" onclick="return confirm('Bạn muốn xóa?')">Xóa</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Danh mục trạng thái công việc</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div>
+    Xin chào <span sec:authentication="name"></span>
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+    </form>
+    <a th:href="@{/}">Trang chủ</a>
+</div>
+<h2>Danh sách trạng thái</h2>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <a th:href="@{/taskstatus/create}">Thêm trạng thái</a>
+</div>
+<table border="1">
+    <tr>
+        <th>ID</th><th>Tên trạng thái</th><th>Mô tả</th><th>Hành động</th>
+    </tr>
+    <tr th:each="status : ${statuses}">
+        <td th:text="${status.id}"></td>
+        <td th:text="${status.name}"></td>
+        <td th:text="${status.description}"></td>
+        <td>
+            <a th:href="@{|/taskstatus/edit/${status.id}|}" sec:authorize="hasAuthority('ADMIN')">Sửa</a>
+            <a th:href="@{|/taskstatus/delete/${status.id}|}" sec:authorize="hasAuthority('ADMIN')"
+               onclick="return confirm('Xóa trạng thái?')">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

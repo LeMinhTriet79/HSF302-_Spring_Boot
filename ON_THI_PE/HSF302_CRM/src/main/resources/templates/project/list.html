@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Danh sách dự án</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div>
+  Xin chào <span sec:authentication="name"></span>
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+  </form>
+  <a th:href="@{/}">Trang chủ</a>
+</div>
+<h2>Danh sách dự án</h2>
+<div sec:authorize="hasAnyAuthority('ADMIN','LEADER')">
+  <a th:href="@{/projects/create}">Thêm dự án</a>
+</div>
+<table border="1">
+  <tr>
+    <th>ID</th><th>Tên dự án</th><th>Mô tả</th><th>Bắt đầu</th><th>Kết thúc</th><th>Leader</th><th>Hành động</th>
+  </tr>
+  <tr th:each="project : ${projects}">
+    <td th:text="${project.id}"></td>
+    <td th:text="${project.name}"></td>
+    <td th:text="${project.description}"></td>
+    <td th:text="${project.startDate}"></td>
+    <td th:text="${project.endDate}"></td>
+    <td th:text="${project.leader.name}"></td>
+    <td>
+      <a th:href="@{|/projects/edit/${project.id}|}" sec:authorize="hasAnyAuthority('ADMIN','LEADER')">Sửa</a>
+      <a th:href="@{|/projects/delete/${project.id}|}" sec:authorize="hasAnyAuthority('ADMIN','LEADER')"
+         onclick="return confirm('Xóa dự án?')">Xóa</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

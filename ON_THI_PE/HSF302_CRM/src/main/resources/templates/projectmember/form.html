@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Thêm thành viên dự án</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div>
+  Xin chào <span sec:authentication="name"></span>
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+  </form>
+  <a th:href="@{/projectmembers}">Quay lại danh sách</a>
+</div>
+<h2>Thêm thành viên vào dự án</h2>
+<form th:action="@{/projectmembers/save}" th:object="${projectMember}" method="post">
+  <input type="hidden" th:field="*{id}" />
+  Dự án:
+  <select th:field="*{project}" required>
+    <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"
+            th:selected="${projectMember.project != null and project.id == projectMember.project.id}"></option>
+  </select><br/>
+  Thành viên:
+  <select th:field="*{user}" required>
+    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"
+            th:selected="${projectMember.user != null and user.id == projectMember.user.id}"></option>
+  </select><br/>
+  <button type="submit" sec:authorize="hasAnyAuthority('ADMIN','LEADER')">Lưu</button>
+</form>
+</body>
+</html>

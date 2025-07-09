@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Thêm/Sửa người dùng</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div>
+  Xin chào <span sec:authentication="name"></span>
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+  </form>
+  <a th:href="@{/users}">Quay lại danh sách</a>
+</div>
+<h2 th:text="${user.id == null ? 'Thêm người dùng' : 'Sửa người dùng'}"></h2>
+<form th:action="@{/users/save}" th:object="${user}" method="post">
+  <input type="hidden" th:field="*{id}" />
+  Email: <input type="email" th:field="*{email}" required /><br/>
+  Mật khẩu: <input type="password" th:field="*{password}" required /><br/>
+  Họ tên: <input type="text" th:field="*{name}" required /><br/>
+  Địa chỉ: <input type="text" th:field="*{address}" /><br/>
+  Số điện thoại: <input type="text" th:field="*{phone}" /><br/>
+  Quyền:
+  <select th:field="*{role}" required>
+    <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"
+            th:selected="${user.role != null and role.id == user.role.id}"></option>
+  </select><br/>
+  <button type="submit" sec:authorize="hasAuthority('ADMIN')">Lưu</button>
+</form>
+</body>
+</html>

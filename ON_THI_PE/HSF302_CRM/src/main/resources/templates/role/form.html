@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Thêm/Sửa quyền</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div>
+  Xin chào <span sec:authentication="name"></span>
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+  </form>
+  <a th:href="@{/roles}">Quay lại danh sách</a>
+</div>
+<h2 th:text="${role.id == null ? 'Thêm quyền' : 'Sửa quyền'}"></h2>
+<form th:action="@{/roles/save}" th:object="${role}" method="post">
+  <input type="hidden" th:field="*{id}" />
+  Tên quyền: <input type="text" th:field="*{name}" required /><br/>
+  Mô tả: <input type="text" th:field="*{description}" /><br/>
+  <button type="submit" sec:authorize="hasAuthority('ADMIN')">Lưu</button>
+</form>
+</body>
+</html>

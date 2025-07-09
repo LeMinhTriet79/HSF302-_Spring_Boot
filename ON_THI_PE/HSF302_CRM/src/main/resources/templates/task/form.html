@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Thêm/Sửa công việc</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div>
+  Xin chào <span sec:authentication="name"></span>
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+  </form>
+  <a th:href="@{/tasks}">Quay lại danh sách</a>
+</div>
+<h2 th:text="${task.id == null ? 'Thêm công việc' : 'Sửa công việc'}"></h2>
+<form th:action="@{/tasks/save}" th:object="${task}" method="post">
+  <input type="hidden" th:field="*{id}" />
+  Tên công việc: <input type="text" th:field="*{name}" required /><br/>
+  Mô tả: <input type="text" th:field="*{description}" /><br/>
+  Ngày bắt đầu: <input type="date" th:field="*{startDate}" required /><br/>
+  Ngày kết thúc: <input type="date" th:field="*{endDate}" required /><br/>
+  Trạng thái:
+  <select th:field="*{status}" required>
+    <option th:each="status : ${statuses}" th:value="${status.id}" th:text="${status.name}"
+            th:selected="${task.status != null and status.id == task.status.id}"></option>
+  </select><br/>
+  Người thực hiện:
+  <select th:field="*{assignee}" required>
+    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"
+            th:selected="${task.assignee != null and user.id == task.assignee.id}"></option>
+  </select><br/>
+  Dự án:
+  <select th:field="*{project}" required>
+    <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"
+            th:selected="${task.project != null and project.id == task.project.id}"></option>
+  </select><br/>
+  <button type="submit" sec:authorize="hasAnyAuthority('ADMIN','LEADER')">Lưu</button>
+</form>
+</body>
+</html>

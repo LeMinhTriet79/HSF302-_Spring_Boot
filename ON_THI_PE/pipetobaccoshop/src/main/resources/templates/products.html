@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý sản phẩm</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h2>Danh sách sản phẩm</h2>
+
+<!-- Nút đăng xuất ở góc trên cùng/phải tùy ý -->
+
+    <a th:href="@{/logout}" style="color:#3B3B98;font-weight:bold;">Đăng xuất</a>
+
+
+<!-- Nút thêm sản phẩm: chỉ hiển thị nếu user là ADMIN -->
+<div style="margin-bottom: 10px;">
+    <a th:if="${user != null and user.role == 'ADMIN'}" th:href="@{/product/new}" style="color:blue;">+ Thêm sản phẩm mới</a>
+</div>
+
+<!-- Form tìm kiếm (nếu cần) -->
+<form th:action="@{/products}" method="get" style="margin-bottom: 15px;">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm kiếm theo tên sản phẩm..."/>
+    <button type="submit">Tìm kiếm</button>
+</form>
+
+<table border="1" cellpadding="6" cellspacing="0">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Loại</th>
+        <th>Mô tả</th>
+        <th>Hình ảnh</th>
+        <th th:if="${user != null and user.role == 'ADMIN'}">Hành động</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="p : ${products}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.price}"></td>
+        <td th:text="${p.category.name}"></td>
+        <td th:text="${p.description}"></td>
+        <td><img th:src="${p.image}" alt="Hình" width="60"/></td>
+        <td>
+            <!-- Chỉ hiện Sửa/Xóa nếu user là ADMIN -->
+            <span th:if="${user != null and user.role == 'ADMIN'}">
+                        <a th:href="@{/product/edit/{id}(id=${p.id})}">Sửa</a> |
+                        <a th:href="@{/product/delete/{id}(id=${p.id})}"
+                           onclick="return confirm('Xác nhận xóa?')">Xóa</a>
+                    </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

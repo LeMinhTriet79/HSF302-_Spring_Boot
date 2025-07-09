@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Danh sách quyền</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<div>
+  Xin chào <span sec:authentication="name"></span>
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+  </form>
+  <a th:href="@{/}">Trang chủ</a>
+</div>
+<h2>Danh sách quyền</h2>
+<div sec:authorize="hasAuthority('ADMIN')">
+  <a th:href="@{/roles/create}">Thêm quyền mới</a>
+</div>
+<table border="1">
+  <tr>
+    <th>ID</th><th>Tên quyền</th><th>Mô tả</th><th>Hành động</th>
+  </tr>
+  <tr th:each="role : ${roles}">
+    <td th:text="${role.id}"></td>
+    <td th:text="${role.name}"></td>
+    <td th:text="${role.description}"></td>
+    <td>
+      <a th:href="@{|/roles/edit/${role.id}|}" sec:authorize="hasAuthority('ADMIN')">Sửa</a>
+      <a th:href="@{|/roles/delete/${role.id}|}" sec:authorize="hasAuthority('ADMIN')"
+         onclick="return confirm('Bạn muốn xóa?')">Xóa</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

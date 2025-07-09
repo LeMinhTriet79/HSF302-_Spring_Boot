@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Danh sách thành viên dự án</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div>
+    Xin chào <span sec:authentication="name"></span>
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+    </form>
+    <a th:href="@{/}">Trang chủ</a>
+</div>
+<h2>Danh sách thành viên dự án</h2>
+<div sec:authorize="hasAnyAuthority('ADMIN','LEADER')">
+    <a th:href="@{/projectmembers/create}">Thêm thành viên dự án</a>
+</div>
+<table border="1">
+    <tr>
+        <th>ID</th><th>Dự án</th><th>Thành viên</th><th>Hành động</th>
+    </tr>
+    <tr th:each="pm : ${projectMembers}">
+        <td th:text="${pm.id}"></td>
+        <td th:text="${pm.project.name}"></td>
+        <td th:text="${pm.user.name}"></td>
+        <td>
+            <a th:href="@{|/projectmembers/delete/${pm.id}|}" sec:authorize="hasAnyAuthority('ADMIN','LEADER')"
+               onclick="return confirm('Xóa khỏi dự án?')">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

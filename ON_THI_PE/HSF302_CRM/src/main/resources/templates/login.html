@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Đăng nhập CRM</title>
+</head>
+<body>
+<h2>Đăng nhập</h2>
+<form th:action="@{/login}" method="post">
+    <label>Email:</label><input type="text" name="username"/><br/>
+    <label>Mật khẩu:</label><input type="password" name="password"/><br/>
+    <button type="submit">Đăng nhập</button>
+</form>
+<div th:if="${param.error}">Sai email hoặc mật khẩu!</div>
+<div th:if="${param.logout}">Đã đăng xuất.</div>
+</body>
+</html>

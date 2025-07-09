@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>CRM Quản lý công việc nhân viên</title>
+
+</head>
+<body>
+<div>
+    Xin chào <span sec:authentication="name"></span>
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline; padding:0;">[Đăng xuất]</button>
+    </form>
+</div>
+<h2>Trang chủ CRM</h2>
+<ul>
+    <li sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/roles}">Quản lý quyền</a>
+    </li>
+    <li sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/users}">Quản lý người dùng</a>
+    </li>
+    <li sec:authorize="hasAnyAuthority('ADMIN','LEADER')">
+        <a th:href="@{/projects}">Quản lý dự án</a>
+    </li>
+    <li sec:authorize="hasAnyAuthority('ADMIN','LEADER')">
+        <a th:href="@{/tasks}">Quản lý công việc</a>
+    </li>
+    <li sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{/taskstatus}">Quản lý trạng thái công việc</a>
+    </li>
+    <li sec:authorize="hasAnyAuthority('ADMIN','LEADER')">
+        <a th:href="@{/projectmembers}">Quản lý thành viên dự án</a>
+    </li>
+    <li sec:authorize="hasAuthority('MEMBER')">
+        <a th:href="@{/tasks}">Xem công việc cá nhân</a>
+    </li>
+</ul>
+</body>
+</html>
