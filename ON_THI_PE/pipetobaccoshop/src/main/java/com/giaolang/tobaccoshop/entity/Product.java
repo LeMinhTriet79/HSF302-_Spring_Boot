@@ -19,4 +19,11 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @Column(nullable = false)
+    private boolean active = true;  // Mặc định là còn bán
+
+    // getter/setter cho active
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }
