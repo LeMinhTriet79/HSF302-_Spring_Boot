@@ -19,6 +19,9 @@
         <p>
             <label for="name">Product Name</label>
             <input type="text" th:field="*{name}" id="name" />
+            <span th:errors="*{name}" style="color: red">IN ERROR MÀU ĐỎ</span>
+<!--            Nếu ô nhập nào có error, thì ta sẽ in lỗi thông báo lấy từ message =ở entity-->
+<!--            Lỗi hiển thị màu đỏ nằm bên dưới-->
         </p>
         <p>
             <label for="quantity">Product Quantity</label>
