@@ -6,6 +6,14 @@
 </head>
 <body>
 <h1>List of products</h1>
+<form th:action="@{/products}" method="get">
+    <p>
+        <label for="kw">Tìm kiếm sản phẩm:</label>
+        <input type="text" id="kw" name="kw">
+        <button type="submit">Tìm kiếm</button>
+    </p>
+</form>
+
 
 <p>
     <a th:href="@{'/products/new'}">Create product</a>

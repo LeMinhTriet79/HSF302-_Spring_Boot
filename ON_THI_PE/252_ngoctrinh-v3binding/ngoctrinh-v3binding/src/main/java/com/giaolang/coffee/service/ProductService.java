@@ -45,4 +45,10 @@ public class ProductService {
         repo.deleteById(id);
     }
 
+    //Hàm search sản phẩm theo tên gọi hàm nào đó, search cần dùng
+    public List<Product> searchProductsByName(String keyword) {
+        //gọi repo giúp
+        return repo.se
+    }
+
 }

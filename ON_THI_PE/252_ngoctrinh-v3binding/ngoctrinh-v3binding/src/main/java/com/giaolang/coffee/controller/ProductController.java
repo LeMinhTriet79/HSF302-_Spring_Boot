@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,16 +23,33 @@ public class ProductController {
     @Autowired  //phục vụ cho danh sách treo đầu dê...
     private CategoryService categoryService;
 
-    @GetMapping("/products")
-    public String showProducts(Model model) {
-
-        List<Product> productList = productService.getAllProducts();
+//    @GetMapping("/products")
+//    public String showProducts(Model model) {
+//
+//        List<Product> productList = productService.getAllProducts();
+//
+//        model.addAttribute("prods", productList);
+//
+//        //thùng hàng đi kèm trang chứa full sản phầm từ table
+//        return "products"; //.html
+//    }
+@GetMapping("/products")
+public String showProducts(@RequestParam(name = "kw", required = false, defaultValue = "") String keyword, Model model) {
+    List<Product> productList;
+    if (keyword.equals("")) {
+        //show full
+        productList = productService.getAllProducts();
 
         model.addAttribute("prods", productList);
-
-        //thùng hàng đi kèm trang chứa full sản phầm từ table
-        return "products"; //.html
+    }else {
+        //search theo keyword thôi, thiếu hàm search rồi
+        productList = s //where like!!!!!!
     }
+
+
+    //thùng hàng đi kèm trang chứa full sản phầm từ table
+    return "products"; //.html
+}
 
     //link edit đc nhấn
     @GetMapping("/products/edit/{id}")
