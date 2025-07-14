@@ -69,7 +69,7 @@ public class ProductController {
     @PostMapping("/products/save")
     //làm ko khéo, 1 đống @RequestParam map từng field ở form vào từng biến ở tham số hàm
     //public String saveProduct(@RequestParam("name") String name, @Res....) {
-    public String saveProduct(@Valid @ModelAttribute("selectedOne") Product product, BindingResult result) {
+    public String saveProduct(@Valid @ModelAttribute("selectedOne") Product product, BindingResult result, Model model) {
         //@Valid phải đứng trước lệnh @ModelAttribute, đứng trước lệnh gom data từ object dưới, html gửi lên, mang ý nghĩa
         //tui sẽ check xem data anh gởi từ html lên có hợp lệ như khai báo trong entity hay không
         //nếu không hợp lệ, gom lỗi vào trong object @BindingResult
@@ -78,6 +78,10 @@ public class ProductController {
         // Nếu có lỗi nhập thì vòng lại màn hình product-form in câu chửi, và yêu cầu sửa
 
         if(result.hasErrors()) {
+            //đưa lại cái danh sách cate
+
+
+            model.addAttribute("cates", categoryService.getAllCategories());
             return "product-form";// quay trở lại màn hình show lỗi
         }
 
