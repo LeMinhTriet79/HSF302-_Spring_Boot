@@ -6,11 +6,12 @@
 </head>
 <body>
 
-    <h1>Create | Update product</h1>
+    <h1 th:if ="${formMode == 'edit'}" th:text="'Edit product'">Create | Update product</h1>
+    <h1 th:if ="${formMode == 'new'}" th:text="'New product'">Create | Update product</h1>
     <form th:action="@{'/products/save'}" method="post" th:object="${selectedOne}" >
         <p>
             <label for="id">Product ID</label>
-            <input type="text" th:field="*{id}" id="id" />
+            <input type="text" th:field="*{id}" id="id" th:readonly="${formMode == 'edit'}"/>
 <!--            :field mang 2 ý nghĩa bên trong
 //              1. generate ra name của ô text này y chang field trong object
                 2. điền value đang có từ object vào ô text này
@@ -44,6 +45,9 @@
                 </option>
             </select>
         </p>
+
+<!--        ta tạo một field hidden ẩn để gửi ngược mode của form này lên hàm save-->
+<!--        để hàm save biết là tạo mới hay là edit-->
 
         <button type="submit">Save</button>
     </form>

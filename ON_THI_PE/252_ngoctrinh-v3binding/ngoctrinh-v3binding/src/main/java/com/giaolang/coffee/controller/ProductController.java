@@ -43,7 +43,8 @@ public String showProducts(@RequestParam(name = "kw", required = false, defaultV
         model.addAttribute("prods", productList);
     }else {
         //search theo keyword thôi, thiếu hàm search rồi
-        productList = s //where like!!!!!!
+        productList = productService.searchProductsByName(keyword); //where like!!!!!!
+        model.addAttribute("prods", productList);
     }
 
 
@@ -63,6 +64,11 @@ public String showProducts(@RequestParam(name = "kw", required = false, defaultV
 
         model.addAttribute("cates", categoryService.getAllCategories());
 
+        //Thê một biến Flag, phất cờ tùy tình huống, đẩy biến này cho - form để biết mode của màn hình là create hay là update
+        //
+        model.addAttribute("formMode", "edit");
+
+
         //thùng hàng đi kèm trang chứa full sản phầm từ table
         return "product-form"; //.html
     }
@@ -76,6 +82,9 @@ public String showProducts(@RequestParam(name = "kw", required = false, defaultV
 
         model.addAttribute("cates", categoryService.getAllCategories());
         //thùng hàng đi kèm trang chứa full sản phầm từ table
+
+        model.addAttribute("formMode", "new");
+
         return "product-form"; //.html
     }
 
@@ -83,13 +92,22 @@ public String showProducts(@RequestParam(name = "kw", required = false, defaultV
     @PostMapping("/products/save")
     //làm ko khéo, 1 đống @RequestParam map từng field ở form vào từng biến ở tham số hàm
     //public String saveProduct(@RequestParam("name") String name, @Res....) {
-    public String saveProduct(@Valid @ModelAttribute("selectedOne") Product product, BindingResult result, Model model) {
+    public String saveProduct(@Valid @ModelAttribute("selectedOne") Product product, BindingResult result, Model model,
+    @RequestParam("formMode") String formMode) {
         //@Valid phải đứng trước lệnh @ModelAttribute, đứng trước lệnh gom data từ object dưới, html gửi lên, mang ý nghĩa
         //tui sẽ check xem data anh gởi từ html lên có hợp lệ như khai báo trong entity hay không
         //nếu không hợp lệ, gom lỗi vào trong object @BindingResult
         //biến gom lỗi phải nằm ngay sau @ModelAttribute
 
+        //Trong kink/edit link ta đã gởi xuống
+
+
+
+        //Edit --> save BT
+
         // Nếu có lỗi nhập thì vòng lại màn hình product-form in câu chửi, và yêu cầu sửa
+
+
 
         if(result.hasErrors()) {
             //đưa lại cái danh sách cate
