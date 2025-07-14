@@ -30,8 +30,8 @@ public class Product {
 
     @Column(name = "Price", nullable = false)
     @NotNull(message = "Price is required")
-    @Min(value = 5, message = "Price is in the range of 5...10M")
-    @Max(value = 10_000_000, message = "Price is in the range of 5...10M")
+    @Min(value = 5000, message = "Price is in the range of 5000...10M")
+    @Max(value = 10_000_000, message = "Price is in the range of 5000...10M")
     private double price;
 
     //RELATIONSHIP MANY TO ONE - NHIỀU SẢN PHẨM CÓ THỂ THUỘC 1 CATEGORY
