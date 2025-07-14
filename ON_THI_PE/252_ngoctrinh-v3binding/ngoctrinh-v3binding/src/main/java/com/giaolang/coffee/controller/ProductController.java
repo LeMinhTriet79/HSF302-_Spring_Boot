@@ -99,11 +99,11 @@ public String showProducts(@RequestParam(name = "kw", required = false, defaultV
         //nếu không hợp lệ, gom lỗi vào trong object @BindingResult
         //biến gom lỗi phải nằm ngay sau @ModelAttribute
 
-        //Trong kink/edit link ta đã gởi xuống
-
-
-
-        //Edit --> save BT
+        // trong link /edit và link /new ta đã gửi xuống product-form cái biến formMode mang giá trị "edit" hoặc "new"
+        // ta nên gửi ngược lại cái giá trị này lên trên hàm save để ta biết hàm được gọi ở mode nào, new hay edit
+        // new -> ta được làm trò: ID CÓ TRÙNG HAY KHÔNG
+        // edit -> thì save bình thường
+        // if formMode == new, == edit .equals
 
         // Nếu có lỗi nhập thì vòng lại màn hình product-form in câu chửi, và yêu cầu sửa
 
