@@ -12,7 +12,7 @@ public class Product {
     private String id;
 
     @Column(name = "Name", columnDefinition = "NVARCHAR(50)", nullable = false)
-    @NotBlank // 
+    @NotBlank //
     private String name;
 
     @Column(name = "Quantity", nullable = false)
