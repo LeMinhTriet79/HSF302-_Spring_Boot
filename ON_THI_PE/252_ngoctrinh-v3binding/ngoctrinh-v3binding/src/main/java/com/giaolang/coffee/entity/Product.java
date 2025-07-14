@@ -1,9 +1,7 @@
 package com.giaolang.coffee.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "Product")
@@ -25,6 +23,9 @@ public class Product {
     private String name;
 
     @Column(name = "Quantity", nullable = false)
+    @NotNull(message = "Quantity is required")
+    @Min(value = 5, message = "quantity is in the range of 5...100")
+    @Max(value = 100, message = "quantity is in the range of 5...100")
     private int quantity;
 
     @Column(name = "Price", nullable = false)
