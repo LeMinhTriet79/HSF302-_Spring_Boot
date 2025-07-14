@@ -2,6 +2,7 @@ package com.giaolang.coffee.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -15,7 +16,12 @@ public class Product {
     @Column(name = "Name", columnDefinition = "NVARCHAR(50)", nullable = false)
     @NotBlank(message = "Name is requiredd - tên sản phẩm không được bỏ trống")//Khác với not null, vì nó
     //ép nhập ký tự có nghĩa
-    @Size(min = 5, max = 50, message = "Name length is in the ranfe of 5..50 characters")
+
+    @Size(min = 5, max = 100, message = "Tên phải dài từ 5 đến 100 ký tự")
+    @Pattern(
+            regexp = "^(\\p{Lu}\\p{Ll}+)(\\s\\p{Lu}\\p{Ll}+)*$",
+            message = "Mỗi từ phải bắt đầu hoa, chỉ chứa chữ (Unicode), không số/ký tự đặc biệt, không khoảng trắng thừa"
+    )
     private String name;
 
     @Column(name = "Quantity", nullable = false)

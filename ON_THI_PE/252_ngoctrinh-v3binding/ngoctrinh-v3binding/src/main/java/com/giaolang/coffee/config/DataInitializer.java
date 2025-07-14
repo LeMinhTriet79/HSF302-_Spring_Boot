@@ -30,14 +30,16 @@ public class DataInitializer implements CommandLineRunner {
         Category cate4 = new Category("Bánh kẹo", "Vị ngọt pass môn");
 
         //CHUẨN BỊ PRODUCT
-        Product p1c1 = new Product("TS01", "Trà sữa hàng xóm nấu", 100, 25_000);
-        Product p2c1 = new Product("TS02", "Trà sữa Ngọc Trinh", 100, 30_000);
+        // CHUẨN BỊ PRODUCT
+        Product p1c1 = new Product("TS01", "Trà Sữa Hàng Xóm Nấu", 100, 25_000);
+        Product p2c1 = new Product("TS02", "Trà Sữa Ngọc Trinh", 100, 30_000);
 
-        Product p1c2 = new Product("CF01", "Cà phê Java vị nguyên bản", 100, 5_700_000);
+        Product p1c2 = new Product("CF01", "Cà Phê Java Vị Nguyên Bản", 100, 5_700_000);
 
-        Product p2c2 = new Product("CF02", "Cà phê Java vị Ngọc Trinh", 100, 2_350_000);
+        Product p2c2 = new Product("CF02", "Cà Phê Java Vị Ngọc Trinh", 100, 2_350_000);
 
-        Product p3c2 = new Product("CF03", "Cà và phê Ngọc Trinh", 100, 2_350_000);
+        Product p3c2 = new Product("CF03", "Cà Và Phê Ngọc Trinh", 100, 2_350_000);
+
 
         cate1.addProduct(p1c1);  //Trà sữa có 2 món
         cate1.addProduct(p2c1);  //add vào list cate Trà sữa
