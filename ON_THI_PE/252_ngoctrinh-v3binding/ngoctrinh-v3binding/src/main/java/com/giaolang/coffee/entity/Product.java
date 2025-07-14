@@ -2,6 +2,7 @@ package com.giaolang.coffee.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Product")
@@ -12,7 +13,8 @@ public class Product {
     private String id;
 
     @Column(name = "Name", columnDefinition = "NVARCHAR(50)", nullable = false)
-    @NotBlank //
+    @NotBlank(message = "Name is requiredd - tên sản phẩm không được bỏ trống")//
+    @Size
     private String name;
 
     @Column(name = "Quantity", nullable = false)
