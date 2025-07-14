@@ -3,9 +3,11 @@ package com.giaolang.coffee.controller;
 import com.giaolang.coffee.entity.Product;
 import com.giaolang.coffee.service.CategoryService;
 import com.giaolang.coffee.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,7 +69,13 @@ public class ProductController {
     @PostMapping("/products/save")
     //làm ko khéo, 1 đống @RequestParam map từng field ở form vào từng biến ở tham số hàm
     //public String saveProduct(@RequestParam("name") String name, @Res....) {
-    public String saveProduct(@ModelAttribute("selectedOne") Product product) {
+    public String saveProduct(@Valid @ModelAttribute("selectedOne") Product product, BindingResult bindingResult) {
+        //@Valid phải đứng trước lệnh @ModelAttribute, đứng trước lệnh gom data từ object dưới, html gửi lên, mang ý nghĩa
+        //tui sẽ check xem data anh gởi từ html lên có hợp lệ như khai báo trong entity hay không
+        //nếu không hợp lệ, gom lỗi vào trong object @BindingResult
+        //biến gom lỗi phải nằm ngay sau @ModelAttribute
+
+
 
         //gọi service save hoy, tạm bỏ qua key trùng, validation
         productService.saveProduct(product);
