@@ -13,8 +13,9 @@ public class Product {
     private String id;
 
     @Column(name = "Name", columnDefinition = "NVARCHAR(50)", nullable = false)
-    @NotBlank(message = "Name is requiredd - tên sản phẩm không được bỏ trống")//
-    @Size
+    @NotBlank(message = "Name is requiredd - tên sản phẩm không được bỏ trống")//Khác với not null, vì nó
+    //ép nhập ký tự có nghĩa
+    @Size(min = 5, max = 50, message = "Name length is in the ranfe of 5..50 characters")
     private String name;
 
     @Column(name = "Quantity", nullable = false)
