@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create | Update product</title>
+</head>
+<body>
+
+    <h1>Create | Update product</h1>
+    <form th:action="@{'/products/save'}" method="post" th:object="${selectedOne}" >
+        <p>
+            <label for="id">Product ID</label>
+            <input type="text" th:field="*{id}" id="id" />
+<!--            :field mang 2 ý nghĩa bên trong
+//              1. generate ra name của ô text này y chang field trong object
+                2. điền value đang có từ object vào ô text này
+ -->
+        </p>
+        <p>
+            <label for="name">Product Name</label>
+            <input type="text" th:field="*{name}" id="name" />
+        </p>
+        <p>
+            <label for="quantity">Product Quantity</label>
+            <input type="text" th:field="*{quantity}" id="quantity" />
+        </p>
+        <p>
+            <label for="price">Product Price</label>
+            <input type="text" th:field="*{price}" id="price" />
+        </p>
+<!--        DANH SÁCH XỔ XUỐNG STYLE TREO ĐẦU DÊ BÁN THỊT HEO - DANH SÁCH CATEGORY-->
+        <p>
+            <label for="cate">Product Category</label>
+            <select th:field="*{cate}" id="cate">
+                <option th:each="x : ${cates}"
+                     th:value="${x.id}"
+                        th:text="${x.name}"
+                     th:selected="${selectedOne.cate !=null and x.id == selectedOne.cate.id}">???
+                </option>
+            </select>
+        </p>
+
+        <button type="submit">Save</button>
+    </form>
+
+
+</body>
+</html>
