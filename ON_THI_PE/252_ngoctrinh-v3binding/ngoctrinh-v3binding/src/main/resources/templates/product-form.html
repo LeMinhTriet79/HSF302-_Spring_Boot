@@ -26,10 +26,12 @@
         <p>
             <label for="quantity">Product Quantity</label>
             <input type="text" th:field="*{quantity}" id="quantity" />
+            <span th:errors="*{quantity}" style="color: red">IN ERROR MÀU ĐỎ</span>
         </p>
         <p>
             <label for="price">Product Price</label>
             <input type="text" th:field="*{price}" id="price" />
+            <span th:errors="*{price}" style="color: red">IN ERROR MÀU ĐỎ</span>
         </p>
 <!--        DANH SÁCH XỔ XUỐNG STYLE TREO ĐẦU DÊ BÁN THỊT HEO - DANH SÁCH CATEGORY-->
         <p>
