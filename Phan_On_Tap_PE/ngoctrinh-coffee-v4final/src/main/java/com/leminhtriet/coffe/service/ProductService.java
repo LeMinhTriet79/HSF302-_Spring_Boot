@@ -21,6 +21,11 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
+    //link edit 1 sản phẩm, ta phải get đc sản phẩm này đẩy về model của product-form
+    public Product getProductById(String id) {
+        return productRepository.findById(id).get();
+    }//hàm tự sinh
+
     //phục vụ cho nút save sản phẩm khi tạo mới, và edit
     //xài chung hàm : jpa nó check id nu mới là insert cũ thì là update
 

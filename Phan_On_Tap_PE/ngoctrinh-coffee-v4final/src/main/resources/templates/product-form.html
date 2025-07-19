@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create | Edit product</title>
 </head>
 <body>
+    <h1> Create | Edit a product</h1>
 
+    <form>
+        <p>
+            <label for = "id">Id</label>
+            <input type="text" id="id" name="id" th:value="${selectedOne.id}">
+        </p>
+
+        <p>
+            <label for = "name">Name</label>
+            <input type="text" id="name" name="name" th:value="${selectedOne.name}">
+        </p>
+
+        <p>
+            <label for = "quantity">Quantity</label>
+            <input type="text" id="quantity" name="quantity" th:value="${selectedOne.quantity}">
+        </p>
+
+        <p>
+            <label for = "price">Price</label>
+            <input type="text" id="price" name="price" th:value="${selectedOne.price}">
+        </p>
+
+    </form>
 </body>
 </html>

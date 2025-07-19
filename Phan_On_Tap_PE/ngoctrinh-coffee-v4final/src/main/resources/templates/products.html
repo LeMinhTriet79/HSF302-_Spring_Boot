@@ -6,6 +6,35 @@
 </head>
 <body>
     <h1>Quán cà phê thầy Hoàng</h1>
+    <p>
+        <a th:href="@{'/products/new'}">New product</a>
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Cate.Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="x : ${products}">
+                <td th:text="${x.id}">???</td>
+                <td th:text="${x.name}">???</td>
+                <td th:text="${x.quantity}">???</td>
+                <td th:text="${x.price}">???</td>
+                <td th:text="${x.cate.name}">???</td>
+                <td>
+<!--                    Link edit, delete-->
+                    <a th:href="@{'/products/edit/' + ${x.id}}">Update |</a>
+                    <a th:href="@{'/products/delete/' + ${x.id}}">Delete</a>
 
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
