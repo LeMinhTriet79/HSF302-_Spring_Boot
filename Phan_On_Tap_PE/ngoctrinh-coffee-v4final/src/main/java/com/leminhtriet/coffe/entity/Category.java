@@ -18,7 +18,7 @@ public class Category {
     private String name; //id và name dành cho Drop-down
     //combo-box xổ xuống!!!
 
-    @Column(name = "Name", columnDefinition = "NVARCHAR(100)")
+    @Column(name = "Description", columnDefinition = "NVARCHAR(100)")
     private String description; //gây nhiễu
 
     //MAPPING MỐI QUAN HỆ 1 - N

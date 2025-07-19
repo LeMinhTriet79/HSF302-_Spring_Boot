@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 //Chính thức vào thế giới Spring data >spring jpa/hibernate
-public interface AccountRepository extends JpaRepository<Account,Long> {
+public class AccountRepository {
 
 }

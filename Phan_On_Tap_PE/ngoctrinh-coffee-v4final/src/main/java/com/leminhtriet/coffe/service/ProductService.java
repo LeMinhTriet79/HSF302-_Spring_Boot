@@ -18,7 +18,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     //phục vụ cho việc show toàn bộ sản phẩm trong trang products.html
-    public List<Product> getAll(){
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
     //phục vụ cho nút save sản phẩm khi tạo mới, và edit
