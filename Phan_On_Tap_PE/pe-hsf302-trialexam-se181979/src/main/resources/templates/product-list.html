@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>StudentName - Sony Management Page</title>
+    <style>
+        body { background: #02CAA9; color: white; font-family: Arial, sans-serif; margin: 0;}
+        h2 { font-size: 24px; margin-bottom: 20px; }
+        .container { width: 98%; max-width: 1100px; margin: 30px auto; }
+        table { width: 100%; border-collapse: collapse; background: none; }
+        th, td { font-size: 18px; border: 1px solid #fff; padding: 10px 4px; text-align: center;}
+        th { background: #029e8b;}
+        a.button, button { background: white; color: #02CAA9; border: none; border-radius: 3px; padding: 6px 13px; margin: 2px; font-size: 16px; text-decoration: none; }
+        a.button:hover, button:hover { background: #028e74; color: white;}
+        .topbar { margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="topbar">
+        <h2>StudentName - Sony Management Page</h2>
+        <a th:href="@{/products/add}" class="button">Add Product</a>
+        <a th:href="@{/products/top3}" class="button">Top 3 per Category</a>
+        <a th:href="@{/logout}" class="button">Logout</a>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price ($)</th>
+            <th>Stock</th>
+            <th>Created At</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.productID}"></td>
+            <td th:text="${product.productName}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.stock}"></td>
+            <td th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${product.category.cateName}"></td>
+            <td>
+                <a th:href="@{'/products/edit/' + ${product.productID}}" class="button">Edit</a>
+                <a th:href="@{'/products/delete/' + ${product.productID}}" class="button"
+                   onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

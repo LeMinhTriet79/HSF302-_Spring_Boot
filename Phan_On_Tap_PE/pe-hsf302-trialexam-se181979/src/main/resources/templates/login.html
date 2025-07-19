@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>StudentName - Login Page</title>
+    <style>
+        body { background: #02CAA9; color: white; font-family: Arial, sans-serif; margin: 0; }
+        h2 { font-size: 24px; margin-bottom: 20px; text-align: center; }
+        .container { width: 400px; margin: 60px auto; padding: 28px 22px; background: rgba(0,0,0,0.10); border-radius: 10px; }
+        label, input, button { font-size: 18px; display: block; width: 100%; margin-bottom: 14px; }
+        input { padding: 7px; border-radius: 3px; border: none; }
+        button { background: white; color: #02CAA9; border: none; border-radius: 3px; padding: 9px 0; margin-top: 10px; cursor: pointer; }
+        button:hover { background: #028e74; color: white; }
+        .error { background: #c00; color: #fff; padding: 7px 0; margin-bottom: 10px; border-radius: 4px; text-align: center; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>StudentName - Login Page</h2>
+    <form th:action="@{/login}" method="post">
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" maxlength="13" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" maxlength="10" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+package com.giaolang.bookstore.repository;
+
+import com.giaolang.bookstore.entity.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+
+    public List<Book> searchAllByNameContainingIgnoreCaseOrAuthorNameContainingIgnoreCase(String name, String authorName);
+
+    public List<Book> getAllByOrderByCreatedAtDesc();
+}

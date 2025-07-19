@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${formMode == 'edit'} ? 'Edit Book' : 'Add New Book'">Book Form</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body class="red-bg">
+<div class="container">
+  <div class="form-content-wrapper">
+    <div class="form-container">
+      <h1 class="yellow-label" th:text="${formMode == 'edit'} ? 'Edit Book' : 'Add New Book'">Edit Book | Add New Book</h1>
+
+      <form th:action="@{'/books/save'}" method="POST" th:object="${selectedOne}">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group">
+          <label for="name" class="yellow-label">Book Name:</label>
+          <input type="text" id="name" th:field="*{name}"
+                  required
+                 class="long-input" />
+          <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="field-error-message">Name is required!</span>
+        </div>
+
+        <div class="form-group">
+          <label for="author" class="yellow-label">Author:</label>
+          <input type="text" id="author" th:field="*{authorName}"
+                  required
+                 class="medium-input" />
+          <span th:if="${#fields.hasErrors('authorName')}" th:errors="*{authorName}" class="field-error-message"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="quantity" class="yellow-label">Quantity:</label>
+          <input type="number" id="quantity" name="quantity"
+                 th:field="*{quantity}" required
+                 class="short-input" />
+          <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="field-error-message"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="price" class="yellow-label">Price:</label>
+          <input type="number" id="price" name="price"
+                 th:field="*{price}" required step="any"
+                 class="short-input" />
+          <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="field-error-message">Price must be between 1...1000 </span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="category" class="yellow-label">Category:</label>
+          <select id="category" name="cate.id" th:field="*{cate.id}" required
+                  class="medium-input">
+            <option th:each="c : ${cates}"
+                    th:value="${c.id}"
+                    th:text="${c.name}"
+                    th:selected="${selectedOne.cate != null and selectedOne.cate.id == c.id}">
+            </option>
+          </select>
+          <span th:if="${#fields.hasErrors('cate.id')}" th:errors="*{cate.id}" class="field-error-message"></span>
+        </div>
+
+        <div class="form-group-button">
+          <button type="submit" class="transparent-button">Save</button>
+          <a th:href="@{/books}" class="transparent-button">Cancel</a>
+        </div>
+
+        <div>
+          <input type="hidden" name="formMode" th:value="${formMode}">
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>© 2025 giáo.làng. All rights reserved.</p>
+</footer>
+</body>
+</html>

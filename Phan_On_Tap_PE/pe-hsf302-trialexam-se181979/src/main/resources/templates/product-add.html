@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Product</title>
+    <style>
+        body { background: #02CAA9; color: white; font-family: Arial;}
+        h2 { font-size: 24px; margin-bottom: 20px; text-align: center;}
+        .form-box { width: 400px; margin: 40px auto; background: rgba(0,0,0,0.10); border-radius: 10px; padding: 30px 18px;}
+        label, input, select, button { font-size: 18px; display: block; width: 100%; margin-bottom: 14px; }
+        input, select { border-radius: 3px; padding: 7px; border: none; }
+        button { background: white; color: #02CAA9; border: none; border-radius: 3px; padding: 9px 0; margin-top: 12px; cursor: pointer;}
+        button:hover { background: #028e74; color: white;}
+        .error { background: #c00; color: #fff; padding: 7px 0; margin-bottom: 10px; border-radius: 4px; text-align: center;}
+    </style>
+</head>
+<body>
+<div class="form-box">
+    <h2>Add Product</h2>
+    <form th:action="@{/products/add}" th:object="${product}" method="post">
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+        <label>Name:</label>
+        <input type="text" th:field="*{productName}" required maxlength="50" minlength="5">
+        <label>Price:</label>
+        <input type="number" th:field="*{price}" required min="100">
+        <label>Stock:</label>
+        <input type="number" th:field="*{stock}" required min="0" max="1000">
+        <label>Category:</label>
+        <select th:field="*{category}" required>
+            <option th:each="c : ${categories}" th:value="${c}" th:text="${c.cateName}"></option>
+        </select>
+        <button type="submit">Add</button>
+    </form>
+    <a th:href="@{/products}" style="color:white; font-size:18px;">Back to list</a>
+</div>
+</body>
+</html>

@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"hsf302.se.fu.vn.controllers","hsf302.se.fu.vn.services"})
-@EnableJpaRepositories(basePackages = "hsf302.se.fu.vn.repositories")
-@EntityScan(basePackages = "hsf302.se.fu.vn")
+//@ComponentScan({"hsf302.se.fu.vn.controllers","hsf302.se.fu.vn.services"})
+//@EnableJpaRepositories(basePackages = "hsf302.se.fu.vn.repositories")
+//@EntityScan(basePackages = "hsf302.se.fu.vn")
 
 public class PeHsf302TrialexamSe181979Application {
 

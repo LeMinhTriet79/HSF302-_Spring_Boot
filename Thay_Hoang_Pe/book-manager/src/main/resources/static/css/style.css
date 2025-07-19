@@ -1,0 +1,383 @@
+/* =======================
+   © 2025 giáo.làng. All rights reserved. Generative AI mãi đỉnh :-)
+   ======================= */
+
+/* =======================
+   Định nghĩa biến CSS cho font-size cơ sở
+   ======================= */
+:root {
+    /* --base-font-size: Định nghĩa kích thước font cơ bản cho các thành phần nhỏ
+       như nút bấm, nhãn của ô nhập.
+       '1rem' tương đương với font-size mặc định của trình duyệt (thường là 16px). */
+    --base-font-size: 1rem;
+
+    /* --h1-font-size: Định nghĩa kích thước font cho tiêu đề <h1>.
+       '2em' nghĩa là font-size sẽ gấp 2 lần font-size của phần tử cha của <h1>. */
+    --h1-font-size: 2em;
+}
+
+/* =======================
+   1. ĐỊNH DẠNG CHUNG (GLOBAL STYLING)
+   ======================= */
+
+/* .red-bg: Định dạng cho các phần tử có class "red-bg" (ở đây là thẻ <body>). */
+.red-bg {
+    background-color: red;           /* background-color: Đặt màu nền là đỏ. */
+    color: white;                    /* color: Đặt màu chữ là trắng. */
+    font-family: Arial, sans-serif;  /* font-family: Đặt font chữ là Arial, nếu không có thì dùng sans-serif. */
+    margin: 0;                       /* margin: Xóa margin mặc định của body (lề ngoài). */
+    /* padding: 20px; - Đã xóa padding ở đây, sẽ đặt ở .container để kiểm soát tốt hơn */
+    position: relative; /* Thêm để định vị tuyệt đối các phần tử con như .header-right-global */
+}
+
+/* .header-right-global: Định vị nhóm "Hello, email" và "Đăng xuất" ở góc trên bên phải của màn hình */
+.header-right-global {
+    position: absolute; /* Định vị tuyệt đối so với body */
+    top: 20px;          /* Khoảng cách 20px từ cạnh trên */
+    right: 20px;        /* Khoảng cách 20px từ cạnh phải */
+    display: flex;      /* Sử dụng Flexbox để các phần tử con nằm ngang */
+    align-items: center;/* Căn giữa các phần tử con theo chiều dọc */
+    gap: 15px;          /* Khoảng cách 15px giữa các phần tử con */
+    z-index: 1000;      /* Đảm bảo nó luôn nằm trên các phần tử khác */
+}
+
+/* .container:
+   Định dạng cho phần tử có class "container".
+   Dùng để bao bọc nội dung và giới hạn độ rộng. */
+.container {
+    max-width: 1200px;                /* max-width: Chiều rộng tối đa của container là 800px. */
+    margin: 0 auto;                  /* margin: Căn giữa container theo chiều ngang (0 cho top/bottom, auto cho left/right). */
+    padding: 20px;                   /* padding: Đặt lề trong (khoảng đệm) là 20px cho tất cả các phía. */
+    width: 100%;                     /* width: Đảm bảo container chiếm 100% chiều rộng của phần tử cha (khi nhỏ hơn max-width). */
+}
+
+/* .login-page:
+   CLASS ĐẶT TRÊN BODY CỦA TRANG LOGIN để căn giữa toàn bộ nội dung theo chiều dọc. */
+.login-page {
+    display: flex;                   /* display: Sử dụng Flexbox để bố cục. */
+    flex-direction: column;          /* flex-direction: Sắp xếp các mục con theo cột. */
+    justify-content: center;         /* justify-content: Căn giữa các mục con theo chiều dọc (trục chính). */
+    align-items: center;             /* align-items: Căn giữa các mục con theo chiều ngang (trục phụ). */
+    min-height: 100vh;               /* min-height: Đảm bảo body chiếm ít nhất 100% chiều cao của viewport (màn hình). */
+    overflow: auto;                  /* overflow: Xử lý nội dung tràn ra ngoài bằng cách thêm thanh cuộn nếu cần. */
+}
+
+/* Tiêu đề ứng dụng trên trang login (ví dụ: Book Manager) */
+.app-title {
+    font-size: 3em;                  /* font-size: Kích thước font lớn hơn cho tiêu đề ứng dụng (gấp 3 lần font cơ sở). */
+    margin-bottom: 30px;             /* margin-bottom: Khoảng cách 30px phía dưới với form login. */
+    text-align: center;              /* text-align: Căn giữa chữ. */
+    color: yellow;                   /* color: Đặt màu chữ là vàng. */
+}
+
+/* .login-content-wrapper:
+   Wrapper để bao bọc form login và footer trên trang login. */
+.login-content-wrapper {
+    display: flex;                   /* display: Sử dụng Flexbox để bố cục. */
+    flex-direction: column;          /* flex-direction: Sắp xếp các mục con theo cột. */
+    align-items: center;             /* align-items: Căn giữa form và footer theo chiều ngang. */
+    width: 100%;                     /* width: Chiếm hết chiều rộng của container cha. */
+    max-width: 600px;                /* max-width: Giới hạn chiều rộng tối đa của wrapper để căn giữa tốt hơn. */
+    margin: auto;                    /* margin: Căn giữa wrapper trong container theo chiều ngang. */
+    margin-top: 0;                   /* margin-top: Đảm bảo không có margin-top không mong muốn. */
+}
+
+/* .form-content-wrapper:
+   Wrapper để bao bọc form tạo/sửa sách và footer trên trang book form. */
+.form-content-wrapper {
+    display: flex;                   /* display: Sử dụng Flexbox. */
+    flex-direction: column;          /* flex-direction: Sắp xếp các mục con theo cột. */
+    align-items: center;             /* align-items: Căn giữa form và footer theo chiều ngang. */
+    width: 100%;                     /* width: Chiếm hết chiều rộng của container. */
+    max-width: 700px;                /* max-width: Giới hạn chiều rộng tối đa của wrapper cho book form. */
+    margin: 20px auto;               /* margin: Căn giữa và tạo khoảng cách 20px trên/dưới. */
+}
+
+/* .books-content-wrapper:
+   Wrapper cho nội dung và bảng của trang danh sách sách (books.html). */
+.books-content-wrapper {
+    background-color: rgba(200, 100, 115, 0.85); /* background-color: Màu nền hồng có độ trong suốt. */
+    padding: 20px;                   /* padding: Đặt lề trong là 20px. */
+    border-radius: 10px;             /* border-radius: Bo tròn góc 10px. */
+    margin-top: 20px;                /* margin-top: Khoảng cách 20px từ tiêu đề trang. */
+    display: flex;                   /* display: Sử dụng Flexbox. */
+    flex-direction: column;          /* flex-direction: Sắp xếp các mục con theo cột. */
+    align-items: center;             /* align-items: Căn giữa các mục theo chiều ngang. */
+    width: 100%;                     /* width: Chiếm hết chiều rộng của phần tử cha. */
+}
+
+/* .yellow-label:
+   Định dạng cho các nhãn (label) có màu vàng và in đậm. */
+.yellow-label {
+    color: yellow;                   /* color: Đặt màu chữ là vàng. */
+    font-weight: bold;               /* font-weight: Đặt độ đậm của chữ là bold (in đậm). */
+}
+
+/* .transparent-button:
+   Định dạng chung cho các nút bấm có nền trong suốt, viền vàng và chữ vàng đậm. */
+.transparent-button {
+    background-color: #A04060;       /* background-color: Màu nền hồng đậm trầm ấm. */
+    border: 1px solid yellow;        /* border: Viền 1px liền mạch màu vàng. */
+    color: yellow;                   /* color: Màu chữ là vàng. */
+    font-weight: bold;               /* font-weight: Chữ in đậm. */
+    padding: 5px 10px;               /* padding: Lề trong 5px trên/dưới, 10px trái/phải. */
+    cursor: pointer;                 /* cursor: Con trỏ chuột thành hình bàn tay khi di chuột qua. */
+    text-decoration: none;           /* text-decoration: Xóa gạch chân (nếu là thẻ <a>). */
+    margin: 2px;                     /* margin: Lề ngoài 2px cho tất cả các phía. */
+    font-size: var(--base-font-size); /* font-size: Sử dụng biến CSS cho kích thước font cơ bản. */
+    border-radius: 8px;              /* border-radius: Bo tròn góc 8px. */
+}
+
+/* Thông báo lỗi chung (ví dụ: trên trang login) */
+.error-message {
+    color: #FFFF66;                  /* Màu vàng sáng */
+    font-style: italic;              /* Chữ in nghiêng */
+    font-size: 1.1em;                /* Cỡ chữ lớn hơn một chút */
+    margin-bottom: 10px;             /* margin-bottom: Khoảng cách 10px phía dưới. */
+    text-align: center;              /* Căn giữa thông báo lỗi */
+    font-weight: bold;               /* In đậm */
+}
+
+/* Thông báo lỗi cho từng trường nhập liệu (trên trang book_form) */
+.field-error-message {
+    color: #FFFF66;                  /* Màu vàng sáng */
+    font-style: italic;              /* Chữ in nghiêng */
+    font-size: 0.95em;               /* Kích thước font nhỏ hơn một chút nhưng lớn hơn ban đầu */
+    margin-left: 10px;               /* Khoảng cách với trường input */
+    align-self: flex-start;          /* Căn chỉnh lỗi theo chiều dọc với input */
+    white-space: nowrap;             /* Ngăn không cho chữ xuống dòng nếu có thể */
+}
+
+/* =======================
+   2. ĐỊNH DẠNG TRANG LOGIN (LOGIN PAGE STYLING)
+   ======================= */
+
+/* .login-form:
+   Định dạng cho khung chính của form đăng nhập. */
+.login-form {
+    background-color: rgba(200, 100, 115, 0.85); /* background-color: Màu nền hồng có độ trong suốt. */
+    padding: 40px 20px;              /* padding: Lề trong 40px trên/dưới, 20px trái/phải. */
+    border-radius: 10px;             /* border-radius: Bo tròn góc 10px. */
+    max-width: 500px;                /* max-width: Chiều rộng tối đa của form login. */
+    width: 100%;                     /* width: Đảm bảo chiếm 100% chiều rộng của wrapper cha. */
+    margin-bottom: 10px;             /* margin-bottom: Khoảng cách 10px với footer. */
+    text-align: left;                /* text-align: Căn chữ về bên trái. */
+}
+
+/* .login-form h1:
+   Định dạng cho tiêu đề <h1> bên trong form login. */
+.login-form h1 {
+    text-align: center;              /* text-align: Căn giữa chữ. */
+    margin-bottom: 20px;             /* margin-bottom: Khoảng cách 20px phía dưới. */
+    color: yellow;                   /* color: Màu chữ vàng. */
+    font-size: var(--h1-font-size);  /* font-size: Sử dụng biến CSS cho kích thước h1. */
+}
+
+/* Khối chứa các cặp label - input trong form login. */
+.login-fields .form-group {
+    display: flex;                   /* display: Sử dụng Flexbox để căn chỉnh label và input. */
+    align-items: center;             /* align-items: Căn giữa các mục con theo chiều dọc. */
+    margin-bottom: 15px;             /* margin-bottom: Khoảng cách 15px giữa các nhóm. */
+}
+
+/* Định dạng cho nhãn (label) trong form login. */
+.login-fields .form-group label {
+    width: 100px;                    /* width: Chiều rộng cố định 100px cho nhãn. */
+    margin-right: 10px;              /* margin-right: Khoảng cách 10px bên phải nhãn. */
+    text-align: right;               /* text-align: Căn chữ về bên phải. */
+    font-size: var(--base-font-size); /* font-size: Kích thước font cơ bản. */
+}
+
+/* Định dạng cho các ô nhập liệu (input) trong form login. */
+.login-fields .form-group input {
+    padding: 5px;                    /* padding: Lề trong 5px cho tất cả các phía. */
+    margin-left: 5px;                /* margin-left: Khoảng cách 5px bên trái. */
+    flex: 1;                         /* flex: Cho phép input co giãn để chiếm hết không gian còn lại. */
+    border-radius: 5px;              /* Bo tròn góc 5px */
+}
+
+/* Khối chứa nút bấm (đăng nhập hoặc lưu/hủy). */
+.form-group-button {
+    text-align: center;              /* text-align: Căn giữa các nút bấm. */
+    margin-top: 10px;                /* margin-top: Khoảng cách 10px phía trên. */
+}
+
+/* =======================
+   3. ĐỊNH DẠNG FORM TẠO/SỬA SÁCH (BOOK FORM STYLING)
+   ======================= */
+
+/* .form-container:
+   Định dạng cho khung chính của form tạo/sửa sách. */
+.form-container {
+    background-color: rgba(200, 100, 115, 0.85); /* background-color: Màu nền hồng có độ trong suốt. */
+    padding: 20px;                   /* padding: Lề trong 20px. */
+    border-radius: 10px;             /* border-radius: Bo tròn góc 10px. */
+    text-align: left;                /* text-align: Căn chữ về bên trái. */
+    max-width: 700px;                /* max-width: Chiều rộng tối đa cho form book-form. */
+    width: 100%;                     /* width: Đảm bảo chiếm 100% chiều rộng của wrapper cha. */
+    margin-bottom: 10px;             /* margin-bottom: Khoảng cách 10px với footer. */
+}
+
+/* .form-container h1:
+   Định dạng cho tiêu đề <h1> bên trong form tạo/sửa sách. */
+.form-container h1 {
+    text-align: center;              /* text-align: Căn giữa chữ. */
+    margin-bottom: 20px;             /* margin-bottom: Khoảng cách 20px phía dưới. */
+    color: yellow;                   /* color: Màu chữ vàng. */
+    font-size: var(--h1-font-size);  /* font-size: Sử dụng biến CSS cho kích thước h1. */
+}
+
+/* Khối chứa các cặp label - input/select trong form tạo/sửa sách. */
+.form-group {
+    display: flex;                   /* display: Sử dụng Flexbox để căn chỉnh label và input. */
+    align-items: center;             /* align-items: Căn giữa các mục con theo chiều dọc. */
+    margin-bottom: 15px;             /* margin-bottom: Khoảng cách 15px giữa các nhóm. */
+    flex-wrap: wrap;                 /* Cho phép các mục xuống dòng nếu không đủ không gian */
+}
+
+/* Định dạng cho nhãn (label) trong form tạo/sửa sách. */
+.form-group label {
+    width: 120px;                    /* width: Chiều rộng cố định 120px cho nhãn. */
+    margin-right: 10px;              /* margin-right: Khoảng cách 10px bên phải nhãn. */
+    text-align: right;               /* text-align: Căn chữ về bên phải. */
+    color: yellow;                   /* color: Màu chữ vàng. */
+    font-weight: bold;               /* font-weight: Chữ in đậm. */
+    font-size: var(--base-font-size); /* font-size: Kích thước font cơ bản. */
+}
+
+/* Định dạng cho các ô nhập liệu (input) và hộp chọn (select) trong form tạo/sửa sách. */
+.form-group input,
+.form-group select {
+    padding: 5px;                    /* padding: Lề trong 5px cho tất cả các phía. */
+    margin-left: 5px;                /* margin-left: Khoảng cách 5px bên trái. */
+    border-radius: 5px;              /* Bo tròn góc 5px */
+    /* Không dùng flex: 1; ở đây để các ô input có thể có độ rộng khác nhau (dùng class riêng). */
+}
+
+/* =======================
+   4. TÙY CHỈNH ĐỘ RỘNG RIÊNG (CUSTOM WIDTHS)
+   ======================= */
+
+/* .short-input: Class để điều chỉnh độ rộng của ô nhập liệu ngắn. */
+.short-input {
+    width: 80px;                     /* width: Chiều rộng 80px. */
+}
+
+/* .medium-input: Class để điều chỉnh độ rộng của ô nhập liệu trung bình. */
+.medium-input {
+    width: 200px;                    /* width: Chiều rộng 200px. */
+}
+
+/* .long-input: Class để điều chỉnh độ rộng của ô nhập liệu dài. */
+.long-input {
+    width: 300px;                    /* Chiều rộng 300px. */
+}
+
+/* =======================
+   5. ĐỊNH DẠNG TRANG BOOKS (BOOKS PAGE STYLING)
+   ======================= */
+
+/* .top-controls:
+   Khối chứa form tìm kiếm và các điều khiển bên phải trên trang danh sách sách. */
+.top-controls {
+    width: 100%;                     /* width: Chiếm 100% chiều rộng. */
+    display: flex;                   /* display: Sử dụng Flexbox. */
+    justify-content: space-between;  /* justify-content: Đẩy form tìm kiếm sang trái, nhóm điều khiển sang phải. */
+    align-items: center;             /* align-items: Căn giữa các mục theo chiều dọc. */
+    margin-bottom: 15px;             /* margin-bottom: Khoảng cách 15px phía dưới với bảng. */
+    /* position: relative; đã được loại bỏ vì .header-right-global không còn là con của nó */
+}
+
+/* .search-form:
+   Định dạng cho form tìm kiếm trên trang danh sách sách. */
+.search-form {
+    display: flex;                   /* display: Sử dụng Flexbox để căn chỉnh input và button. */
+    align-items: center;             /* align-items: Căn giữa input và button tìm kiếm theo chiều dọc. */
+    margin-bottom: 0;                /* margin-bottom: Đảm bảo không có lề dưới không cần thiết. */
+}
+
+/* .search-form input[type="text"]:
+   Định dạng cho ô nhập liệu tìm kiếm văn bản. */
+.search-form input[type="text"] {
+    width: 250px;                    /* width: Chiều rộng cố định 250px. */
+    padding: 5px;                    /* padding: Lề trong 5px. */
+    margin-right: 10px;              /* margin-right: Khoảng cách 10px bên phải. */
+    border-radius: 5px;              /* Bo tròn góc 5px */
+}
+
+/* .user-greeting:
+   Định dạng cho câu chào người dùng. */
+.user-greeting {
+    /* Đã có yellow-label nên màu và font-weight đã được định nghĩa. */
+    white-space: nowrap;             /* white-space: Ngăn không cho chữ xuống dòng. */
+}
+
+/* .logout-button:
+   Định dạng cho nút Đăng xuất (kế thừa từ transparent-button). */
+.logout-button {
+    /* Đã kế thừa transparent-button. */
+}
+
+/* .admin-controls: Định dạng cho nút "Thêm sách mới" */
+.admin-controls {
+    width: 100%;
+    text-align: right; /* Căn nút "Thêm sách mới" sang phải */
+    margin-top: 10px; /* Khoảng cách với phần trên */
+    margin-bottom: 15px; /* Khoảng cách với bảng */
+}
+
+/* .create-button:
+   Định dạng cho nút "Thêm sách mới" (kế thừa từ transparent-button). */
+.create-button {
+    /* Đã kế thừa transparent-button. */
+}
+
+/* .books-table-container:
+   Khối chứa bảng danh sách sách. */
+.books-table-container {
+    width: 100%;                     /* width: Chiếm 100% chiều rộng. */
+    /* Background-color đã được chuyển lên .books-content-wrapper. */
+}
+
+/* .no-results-message: Thông báo khi không tìm thấy kết quả tìm kiếm trên trang books.html */
+.no-results-message {
+    color: #FFFF66;                  /* Màu vàng sáng */
+    font-style: italic;              /* Chữ in nghiêng */
+    font-size: 1.1em;                /* Cỡ chữ lớn hơn một chút */
+    margin-top: 15px;                /* Khoảng cách trên */
+    margin-bottom: 15px;             /* Khoảng cách dưới */
+    text-align: center;              /* Căn giữa */
+    font-weight: bold;               /* In đậm */
+}
+
+/* table:
+   Định dạng cho thẻ <table>. */
+table {
+    width: 100%;                     /* width: Bảng chiếm 100% chiều rộng của phần tử cha. */
+    border-collapse: collapse;       /* border-collapse: Gộp các đường viền của ô và bảng thành một đường duy nhất. */
+}
+
+/* table, th, td:
+   Định dạng cho bảng, tiêu đề cột (<th>) và ô dữ liệu (<td>). */
+table, th, td {
+    border: 1px solid yellow;        /* border: Viền 1px, liền mạch, màu vàng cho tất cả các phần này. */
+}
+
+/* th, td:
+   Định dạng riêng cho tiêu đề cột và ô dữ liệu. */
+th, td {
+    padding: 10px;                   /* padding: Lề trong là 10px. */
+    text-align: left;                /* text-align: Căn chữ về bên trái. */
+    vertical-align: top;             /* vertical-align: Căn nội dung lên phía trên (để nội dung không bị dồn xuống khi hàng cao). */
+}
+
+/* .footer:
+   Định dạng cho phần tử footer ở cuối trang. */
+.footer {
+    text-align: center;              /* text-align: Căn giữa chữ. */
+    margin-top: 20px;                /* margin-top: Khoảng cách rõ ràng 20px với khối form/bảng phía trên. */
+    padding: 10px 0;                 /* padding: Lề trong 10px trên/dưới, 0 trái/phải. */
+    font-size: 0.9em;                /* font-size: Kích thước font nhỏ hơn một chút. */
+    color: yellow !important;        /* color: Màu chữ vàng (dùng !important để đảm bảo ghi đè). */
+    width: 100%;                     /* width: Chiếm hết chiều ngang của phần tử cha. */
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book List</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+
+<body class="red-bg">
+  <div class="header-right-global">
+    <span class="user-greeting yellow-label">Hello, <span th:text="${session.loggedInUser.getEmail()}"></span></span>
+    <a th:href="@{/logout}" class="transparent-button logout-button">Logout</a>
+  </div>
+
+  <div class="container">
+    <h1 class="yellow-label">Book List</h1>
+
+    <div class="books-content-wrapper">
+      <div class="top-controls">
+        <form th:action="@{/books}" method="get" class="search-form">
+          <input type="text" name="keyword" placeholder="Search by name or author"/>
+          <button type="submit" class="transparent-button">Search</button>
+        </form>
+
+        </div>
+
+      <div th:if="${session.loggedInUser.role == 1}" class="admin-controls">
+        <a th:href="@{/books/create}" class="transparent-button create-button">Add New Book</a>
+      </div>
+
+      <div th:if="${books.isEmpty() and param.keyword != null}" class="no-results-message">
+        No products found matching keyword "<span th:text="${param.keyword}"></span>".
+      </div>
+
+      <div class="books-table-container">
+        <table>
+          <thead>
+          <tr>
+            <th class="yellow-label">Book Name</th>
+            <th class="yellow-label">Author</th>
+            <th class="yellow-label">Quantity</th>
+            <th class="yellow-label">Price</th>
+            <th class="yellow-label">Category</th>
+            <th class="yellow-label">Created Time</th>
+            <th class="yellow-label" th:if="${session.loggedInUser.role == 1}">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="book : ${books}">
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.authorName}"></td>
+            <td th:text="${book.quantity}"></td>
+            <td th:text="${book.price}"></td>
+            <td th:text="${book.cate.name}"></td>
+            <td th:text="${book.createdAt}"></td>
+            <td th:if="${session.loggedInUser.role == 1}">
+              <a th:href="@{'/books/edit/' + ${book.id}}" class="transparent-button">Edit</a>
+              <a th:href="@{'/books/delete/' + ${book.id}}" class="transparent-button"
+                 onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 giáo.làng. All rights reserved.</p>
+  </footer>
+</body>
+</html>

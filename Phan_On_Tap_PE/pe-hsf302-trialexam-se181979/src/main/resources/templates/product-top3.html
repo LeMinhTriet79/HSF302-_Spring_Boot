@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Top 3 Products by Category</title>
+    <style>
+        body { background: #02CAA9; color: white; font-family: Arial;}
+        h2 { font-size: 24px; margin-bottom: 20px; }
+        .container { width: 98%; max-width: 1100px; margin: 30px auto; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { font-size: 18px; border: 1px solid #fff; padding: 10px 4px; text-align: center;}
+        th { background: #029e8b;}
+        h3 { font-size: 20px; margin-top: 25px; margin-bottom: 8px;}
+        a { color: white; font-size: 18px;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Top 3 Products with Highest Stock by Category</h2>
+    <a th:href="@{/products}">Back to list</a>
+    <div th:each="cate : ${categories}">
+        <h3 th:text="${cate.cateName}"></h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Stock</th>
+            </tr>
+            <tr th:each="p : ${productService.getTop3ByCategory(cate.cateID)}">
+                <td th:text="${p.productID}"></td>
+                <td th:text="${p.productName}"></td>
+                <td th:text="${p.stock}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

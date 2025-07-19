@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body class="red-bg login-page">
+    <div class="container">
+        <h1 class="yellow-label app-title">Book Manager</h1> <div class="login-content-wrapper">
+            <div class="login-form">
+                <h1 class="yellow-label">Login</h1>
+                <div th:if="${error}" class="error-message" th:text="${error}">Login Error</div>
+                <form th:action="@{/auth}" method="post" class="login-fields">
+                    <div class="form-group">
+                        <label for="email" class="yellow-label">Email:</label>
+                        <input type="text" id="email" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="yellow-label">Password:</label>
+                        <input type="password" id="password" name="password" required />
+                    </div>
+                    <div class="form-group-button">
+                        <button type="submit" class="transparent-button">Login</button>
+                    </div>
+                </form>
+            </div>
+            <footer class="footer">
+                <p>© 2025 giáo.làng. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
