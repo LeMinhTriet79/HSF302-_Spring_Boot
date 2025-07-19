@@ -1,5 +1,6 @@
 package com.leminhtriet.coffe.controller;
 
+import com.leminhtriet.coffe.entity.Product;
 import com.leminhtriet.coffe.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,11 +36,11 @@ public class ProductController {
     }
 
     ///products/new
-    @GetMapping("/products/new/")
-    public String create(@PathVariable("id") String id, Model model) {//Model là thùng chứa infor sẽ gửi cho trang trước khi render
+    @GetMapping("/products/new")
+    public String create(Model model) {//Model là thùng chứa infor sẽ gửi cho trang trước khi render
         //kèm cái thùng chứa data, nhờ thymleaf trộn, mix, merge, reder, đưa cho tomcat bản hoàn chỉnh thuần html
-
-        model.addAttribute("selectedOne", productService.getProductById(id)); //gửi danh sách đọc từ table cho vào thùng
+        //tạo mới vẫn phải gửi 1 selected object chính là 1 object product bên
+        model.addAttribute("selectedOne", new Product()); //gửi danh sách đọc từ table cho vào thùng
 
         return "product-form";
     }
