@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Book Form</title>
+  <link rel="stylesheet" th:href="@{'/css/style.css'}" />
+</head>
+<body>
+<div>
+  <div>
+    <div>
+      <h1>Book Form (Edit/Add)</h1>
+
+      <form method="post" action="#">
+        <input type="hidden" name="id" value="1" />
+
+        <div class="form-group">
+          <label for="name">Book Name:</label>
+          <input type="text" id="name" name="name" required value="The Great Pure HTML Adventure" />
+          <span></span>
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author:</label>
+          <input type="text" id="author" name="author" required value="AI Assistant" />
+          <span></span>
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" required min="1" max="1000" value="10" />
+          <span></span>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" required min="1" max="1000" step="any" value="25.50" />
+          <span>Error, duplicate key (Example static error)</span>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status:</label>
+          <select id="status" name="status" required>
+            <option value="ACTIVE">ACTIVE</option>
+            <option value="INACTIVE">INACTIVE</option>
+          </select>
+          <span>Please select a status (Example static error)</span>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <select id="category" name="category.id" required>
+            <option value="1">Fiction</option>
+            <option value="2">Science</option>
+            <option value="3">History</option>
+          </select>
+          <span></span>
+        </div>
+
+        <div style="text-align: left; margin-top: 20px;">
+          <button type="submit">Save</button>
+          <button type="submit">Cancel</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer style="text-align: center; margin-top: 20px; font-size: 14px;">
+  <p>© 2025 giáo.làng. All rights reserved.</p>
+</footer>
+</body>
+</html>
