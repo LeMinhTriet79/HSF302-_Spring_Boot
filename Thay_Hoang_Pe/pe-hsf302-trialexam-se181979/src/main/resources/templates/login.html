@@ -11,8 +11,8 @@
         <div>
             <div>
                 <h1>Login</h1>
-                <div>Login Error</div>
-                <form action="/login" method="post">
+                <div th:if="${error}" th:text="${error}">Login Error</div>
+                <form th:action="@{'/auth'}" method="post">
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="text" id="email" name="email" required />
